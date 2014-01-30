@@ -1,0 +1,106 @@
+<data description="multiple services per each table" enableBatchRequests="false" enableBoxcarring="false" name="WSO2_QAP_PRODUCT_BUILD_DataService" serviceNamespace="http://ws.wso2.org/dataservice" serviceStatus="active">
+   <config id="default">
+      <property name="carbon_datasource_name">wso2_mysql_qa_portal</property>
+   </config>
+   <query id="update_WSO2_QAP_PRODUCT_BUILD_query" useConfig="default">
+      <sql>UPDATE WSO2_QAP_PRODUCT_BUILD SET WSO2_QAP_PRODUCT_VERSION_ID=?,WSO2_QAP_BUILD_NAME=?,WSO2_QAP_RELEASE_DATE=?,WSO2_QAP_TEST_PLAN_ID=? WHERE WSO2_QAP_BUILD_ID=?</sql>
+      <param name="WSO2_QAP_PRODUCT_VERSION_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_BUILD_NAME" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="WSO2_QAP_RELEASE_DATE" ordinal="3" paramType="SCALAR" sqlType="DATE" type="IN"/>
+      <param name="WSO2_QAP_TEST_PLAN_ID" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_BUILD_ID" ordinal="5" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="insert_WSO2_QAP_PRODUCT_BUILD_query" useConfig="default">
+      <sql>INSERT INTO WSO2_QAP_PRODUCT_BUILD(WSO2_QAP_PRODUCT_VERSION_ID,WSO2_QAP_BUILD_NAME,WSO2_QAP_RELEASE_DATE,WSO2_QAP_TEST_PLAN_ID) VALUES(?,?,?,?)</sql>
+      <param name="WSO2_QAP_PRODUCT_VERSION_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_BUILD_NAME" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="WSO2_QAP_RELEASE_DATE" ordinal="3" paramType="SCALAR" sqlType="DATE" type="IN"/>
+      <param name="WSO2_QAP_TEST_PLAN_ID" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="select_all_WSO2_QAP_PRODUCT_BUILD_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_BUILD_ID, WSO2_QAP_PRODUCT_VERSION_ID, WSO2_QAP_BUILD_NAME, WSO2_QAP_RELEASE_DATE, WSO2_QAP_TEST_PLAN_ID FROM WSO2_QAP_PRODUCT_BUILD</sql>
+      <result element="WSO2_QAP_PRODUCT_BUILDCollection" rowName="WSO2_QAP_PRODUCT_BUILD">
+         <element column="WSO2_QAP_BUILD_ID" name="WSO2_QAP_BUILD_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_PRODUCT_VERSION_ID" name="WSO2_QAP_PRODUCT_VERSION_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_BUILD_NAME" name="WSO2_QAP_BUILD_NAME" xsdType="xs:string"/>
+         <element column="WSO2_QAP_RELEASE_DATE" name="WSO2_QAP_RELEASE_DATE" xsdType="xs:date"/>
+         <element column="WSO2_QAP_TEST_PLAN_ID" name="WSO2_QAP_TEST_PLAN_ID" xsdType="xs:integer"/>
+      </result>
+   </query>
+   <query id="delete_WSO2_QAP_PRODUCT_BUILD_query" useConfig="default">
+      <sql>DELETE FROM WSO2_QAP_PRODUCT_BUILD WHERE WSO2_QAP_BUILD_ID=?</sql>
+      <param name="WSO2_QAP_BUILD_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="select_with_key_WSO2_QAP_PRODUCT_BUILD_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_BUILD_ID, WSO2_QAP_PRODUCT_VERSION_ID, WSO2_QAP_BUILD_NAME, WSO2_QAP_RELEASE_DATE, WSO2_QAP_TEST_PLAN_ID FROM WSO2_QAP_PRODUCT_BUILD WHERE WSO2_QAP_BUILD_ID=?</sql>
+      <param name="WSO2_QAP_BUILD_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_PRODUCT_BUILDCollection" rowName="WSO2_QAP_PRODUCT_BUILD">
+         <element column="WSO2_QAP_BUILD_ID" name="WSO2_QAP_BUILD_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_PRODUCT_VERSION_ID" name="WSO2_QAP_PRODUCT_VERSION_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_BUILD_NAME" name="WSO2_QAP_BUILD_NAME" xsdType="xs:string"/>
+         <element column="WSO2_QAP_RELEASE_DATE" name="WSO2_QAP_RELEASE_DATE" xsdType="xs:date"/>
+         <element column="WSO2_QAP_TEST_PLAN_ID" name="WSO2_QAP_TEST_PLAN_ID" xsdType="xs:integer"/>
+      </result>
+   </query>
+   <query id="select_with_key_WSO2_ALL_DETAILS_BUILD_query" useConfig="default">
+	<sql>SELECT WSO2_QAP_PRODUCT_VERSION_ID, WSO2_QAP_PRODUCT_ID, WSO2_QAP_PRODUCT_NAME, WSO2_QAP_PRODUCT_VERSION, WSO2_QAP_BUILD_ID, WSO2_QAP_BUILD_NAME, DATE_FORMAT(WSO2_QAP_RELEASE_DATE,'%d/%m/%Y') AS WSO2_QAP_RELEASE_DATE, WSO2_QAP_TEST_PLAN_ID FROM WSO2_QAP_PRODUCT NATURAL JOIN WSO2_QAP_PRODUCT_VERSION NATURAL JOIN WSO2_QAP_PRODUCT_BUILD WHERE WSO2_QAP_BUILD_ID=?</sql>
+	<param name="WSO2_QAP_BUILD_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+	<result element="WSO2_QAP_PRODUCT_BUILDCollection" rowName="WSO2_QAP_PRODUCT_BUILD">
+         <element column="WSO2_QAP_BUILD_ID" name="WSO2_QAP_BUILD_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_PRODUCT_VERSION_ID" name="WSO2_QAP_PRODUCT_VERSION_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_BUILD_NAME" name="WSO2_QAP_BUILD_NAME" xsdType="xs:string"/>
+         <element column="WSO2_QAP_RELEASE_DATE" name="WSO2_QAP_RELEASE_DATE" xsdType="xs:date"/>
+         <element column="WSO2_QAP_TEST_PLAN_ID" name="WSO2_QAP_TEST_PLAN_ID" xsdType="xs:integer"/>
+	<element column="WSO2_QAP_PRODUCT_ID" name="WSO2_QAP_PRODUCT_ID" xsdType="xs:integer"/>
+	<element column="WSO2_QAP_PRODUCT_VERSION" name="WSO2_QAP_PRODUCT_VERSION" xsdType="xs:string"/>	
+	<element column="WSO2_QAP_PRODUCT_NAME" name="WSO2_QAP_PRODUCT_NAME" xsdType="xs:string"/>
+      </result>
+	</query>
+   <operation name="select_with_key_WSO2_QAP_PRODUCT_BUILD_operation">
+      <call-query href="select_with_key_WSO2_QAP_PRODUCT_BUILD_query">
+         <with-param name="WSO2_QAP_BUILD_ID" query-param="WSO2_QAP_BUILD_ID"/>
+      </call-query>
+   </operation>
+   <operation name="update_WSO2_QAP_PRODUCT_BUILD_operation">
+      <call-query href="update_WSO2_QAP_PRODUCT_BUILD_query">
+         <with-param name="WSO2_QAP_BUILD_NAME" query-param="WSO2_QAP_BUILD_NAME"/>
+         <with-param name="WSO2_QAP_TEST_PLAN_ID" query-param="WSO2_QAP_TEST_PLAN_ID"/>
+         <with-param name="WSO2_QAP_PRODUCT_VERSION_ID" query-param="WSO2_QAP_PRODUCT_VERSION_ID"/>
+         <with-param name="WSO2_QAP_RELEASE_DATE" query-param="WSO2_QAP_RELEASE_DATE"/>
+         <with-param name="WSO2_QAP_BUILD_ID" query-param="WSO2_QAP_BUILD_ID"/>
+      </call-query>
+   </operation>
+   <operation name="delete_WSO2_QAP_PRODUCT_BUILD_operation">
+      <call-query href="delete_WSO2_QAP_PRODUCT_BUILD_query">
+         <with-param name="WSO2_QAP_BUILD_ID" query-param="WSO2_QAP_BUILD_ID"/>
+      </call-query>
+   </operation>
+   <operation name="select_all_WSO2_QAP_PRODUCT_BUILD_operation">
+      <call-query href="select_all_WSO2_QAP_PRODUCT_BUILD_query"/>
+   </operation>
+   <operation name="insert_WSO2_QAP_PRODUCT_BUILD_operation">
+      <call-query href="insert_WSO2_QAP_PRODUCT_BUILD_query">
+         <with-param name="WSO2_QAP_BUILD_NAME" query-param="WSO2_QAP_BUILD_NAME"/>
+         <with-param name="WSO2_QAP_TEST_PLAN_ID" query-param="WSO2_QAP_TEST_PLAN_ID"/>
+         <with-param name="WSO2_QAP_PRODUCT_VERSION_ID" query-param="WSO2_QAP_PRODUCT_VERSION_ID"/>
+         <with-param name="WSO2_QAP_RELEASE_DATE" query-param="WSO2_QAP_RELEASE_DATE"/>
+      </call-query>
+   </operation>
+   <resource method="POST" path="add/builds">
+      <call-query href="insert_WSO2_QAP_PRODUCT_BUILD_query">
+         <with-param name="WSO2_QAP_BUILD_NAME" query-param="WSO2_QAP_BUILD_NAME"/>
+         <with-param name="WSO2_QAP_TEST_PLAN_ID" query-param="WSO2_QAP_TEST_PLAN_ID"/>
+         <with-param name="WSO2_QAP_PRODUCT_VERSION_ID" query-param="WSO2_QAP_PRODUCT_VERSION_ID"/>
+         <with-param name="WSO2_QAP_RELEASE_DATE" query-param="WSO2_QAP_RELEASE_DATE"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="view/builds">
+      <call-query href="select_all_WSO2_QAP_PRODUCT_BUILD_query">                                     
+      </call-query>
+   </resource>
+   <resource method="GET" path="get/build_by_id/{WSO2_QAP_BUILD_ID}">
+      <call-query href="select_with_key_WSO2_ALL_DETAILS_BUILD_query">  
+		<with-param name="WSO2_QAP_BUILD_ID" query-param="WSO2_QAP_BUILD_ID"/>                                  
+      </call-query>
+   </resource>
+</data>

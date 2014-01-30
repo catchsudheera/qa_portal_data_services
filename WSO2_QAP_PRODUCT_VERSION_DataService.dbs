@@ -1,0 +1,141 @@
+<data description="multiple services per each table" enableBatchRequests="false" enableBoxcarring="false" name="WSO2_QAP_PRODUCT_VERSION_DataService" serviceNamespace="http://ws.wso2.org/dataservice" serviceStatus="active">
+   <config id="default">
+      <property name="carbon_datasource_name">wso2_mysql_qa_portal</property>
+   </config>
+   <query id="delete_WSO2_QAP_PRODUCT_VERSION_query" useConfig="default">
+      <sql>DELETE FROM WSO2_QAP_PRODUCT_VERSION WHERE WSO2_QAP_PRODUCT_VERSION_ID=?</sql>
+      <param name="WSO2_QAP_PRODUCT_VERSION_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="select_all_WSO2_QAP_PRODUCT_VERSION_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_PRODUCT_VERSION_ID, WSO2_QAP_PRODUCT_ID, WSO2_QAP_PRODUCT_VERSION FROM WSO2_QAP_PRODUCT_VERSION</sql>
+      <result element="WSO2_QAP_PRODUCT_VERSIONCollection" rowName="WSO2_QAP_PRODUCT_VERSION">
+         <element column="WSO2_QAP_PRODUCT_VERSION_ID" name="WSO2_QAP_PRODUCT_VERSION_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_PRODUCT_ID" name="WSO2_QAP_PRODUCT_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_PRODUCT_VERSION" name="WSO2_QAP_PRODUCT_VERSION" xsdType="xs:string"/>
+      </result>
+   </query>
+   <query id="update_WSO2_QAP_PRODUCT_VERSION_query" useConfig="default">
+      <sql>UPDATE WSO2_QAP_PRODUCT_VERSION SET WSO2_QAP_PRODUCT_ID=?,WSO2_QAP_PRODUCT_VERSION=? WHERE WSO2_QAP_PRODUCT_VERSION_ID=?</sql>
+      <param name="WSO2_QAP_PRODUCT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_PRODUCT_VERSION" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="WSO2_QAP_PRODUCT_VERSION_ID" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="select_with_version_key_VERSION_JOIN_FEATURE" useConfig="default">
+      <sql>SELECT WSO2_QAP_PRODUCT_VERSION_ID, WSO2_QAP_FEATURE_ID, WSO2_QAP_DESCRIPTION, WSO2_QAP_REDMINE_URL, WSO2_QAP_SAMPLE_ID, WSO2_QAP_PRODUCT_ID, WSO2_QAP_PRODUCT_VERSION FROM WSO2_QAP_FEATURE NATURAL JOIN WSO2_QAP_PRODUCT_VERSION_FEATURE_MAPPING NATURAL JOIN WSO2_QAP_PRODUCT_VERSION WHERE WSO2_QAP_PRODUCT_VERSION_ID=?</sql>
+      <param name="WSO2_QAP_PRODUCT_VERSION_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_PRODUCT_VERSIONCollection" rowName="WSO2_QAP_PRODUCT_VERSION">
+         <element column="WSO2_QAP_PRODUCT_VERSION_ID" name="WSO2_QAP_PRODUCT_VERSION_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_FEATURE_ID" name="WSO2_QAP_FEATURE_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
+         <element column="WSO2_QAP_REDMINE_URL" name="WSO2_QAP_REDMINE_URL" xsdType="xs:string"/>
+         <element column="WSO2_QAP_SAMPLE_ID" name="WSO2_QAP_SAMPLE_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_PRODUCT_ID" name="WSO2_QAP_PRODUCT_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_PRODUCT_VERSION" name="WSO2_QAP_PRODUCT_VERSION" xsdType="xs:string"/>
+      </result>
+   </query>
+   <query id="select_with_version_key_VERSION_JOIN_BUILD" useConfig="default">
+      <sql>SELECT WSO2_QAP_BUILD_ID,WSO2_QAP_BUILD_NAME,DATE_FORMAT(WSO2_QAP_RELEASE_DATE,'%d/%m/%Y') AS WSO2_QAP_RELEASE_DATE FROM WSO2_QAP_PRODUCT_BUILD NATURAL JOIN WSO2_QAP_PRODUCT_VERSION WHERE WSO2_QAP_PRODUCT_VERSION_ID=?</sql>
+      <param name="WSO2_QAP_PRODUCT_VERSION_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_PRODUCT_VERSIONCollection" rowName="WSO2_QAP_PRODUCT_VERSION">
+         <element column="WSO2_QAP_BUILD_ID" name="WSO2_QAP_BUILD_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_BUILD_NAME" name="WSO2_QAP_BUILD_NAME" xsdType="xs:string"/>
+         <element column="WSO2_QAP_RELEASE_DATE" name="WSO2_QAP_RELEASE_DATE" xsdType="xs:date"/>
+      </result>
+   </query>
+   <query id="select_with_key_WSO2_QAP_PRODUCT_VERSION_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_PRODUCT_VERSION_ID, WSO2_QAP_PRODUCT_ID, WSO2_QAP_PRODUCT_VERSION FROM WSO2_QAP_PRODUCT_VERSION WHERE WSO2_QAP_PRODUCT_VERSION_ID=?</sql>
+      <param name="WSO2_QAP_PRODUCT_VERSION_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_PRODUCT_VERSIONCollection" rowName="WSO2_QAP_PRODUCT_VERSION">
+         <element column="WSO2_QAP_PRODUCT_VERSION_ID" name="WSO2_QAP_PRODUCT_VERSION_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_PRODUCT_ID" name="WSO2_QAP_PRODUCT_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_PRODUCT_VERSION" name="WSO2_QAP_PRODUCT_VERSION" xsdType="xs:string"/>
+      </result>
+   </query>
+   <query id="select_with_key_WSO2_QAP_PRODUCT_ID_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_PRODUCT_VERSION_ID, WSO2_QAP_PRODUCT_ID, WSO2_QAP_PRODUCT_VERSION FROM WSO2_QAP_PRODUCT_VERSION WHERE WSO2_QAP_PRODUCT_ID=?</sql>
+      <param name="WSO2_QAP_PRODUCT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_PRODUCT_VERSIONCollection" rowName="WSO2_QAP_PRODUCT_VERSION">
+         <element column="WSO2_QAP_PRODUCT_VERSION_ID" name="WSO2_QAP_PRODUCT_VERSION_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_PRODUCT_ID" name="WSO2_QAP_PRODUCT_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_PRODUCT_VERSION" name="WSO2_QAP_PRODUCT_VERSION" xsdType="xs:string"/>
+      </result>
+   </query>
+   <query id="select_with_version_key_VERSION_JOIN_PRODUCT" useConfig="default">
+      <sql>SELECT WSO2_QAP_PRODUCT_VERSION,WSO2_QAP_PRODUCT_NAME FROM WSO2_QAP_PRODUCT_VERSION NATURAL JOIN WSO2_QAP_PRODUCT WHERE 	WSO2_QAP_PRODUCT_VERSION_ID=?</sql>
+      <param name="WSO2_QAP_PRODUCT_VERSION_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_PRODUCT_VERSIONCollection" rowName="WSO2_QAP_PRODUCT_VERSION">
+         <element column="WSO2_QAP_PRODUCT_VERSION" name="WSO2_QAP_PRODUCT_VERSION" xsdType="xs:string"/>
+         <element column="WSO2_QAP_PRODUCT_NAME" name="WSO2_QAP_PRODUCT_NAME" xsdType="xs:string"/>
+      </result>
+   </query>
+   <query id="insert_WSO2_QAP_PRODUCT_VERSION_query" useConfig="default">
+      <sql>INSERT INTO WSO2_QAP_PRODUCT_VERSION(WSO2_QAP_PRODUCT_ID,WSO2_QAP_PRODUCT_VERSION) VALUES(?,?)</sql>
+      <param name="WSO2_QAP_PRODUCT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_PRODUCT_VERSION" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+   </query>
+   <operation name="select_with_key_WSO2_QAP_PRODUCT_VERSION_operation">
+      <call-query href="select_with_key_WSO2_QAP_PRODUCT_VERSION_query">
+         <with-param name="WSO2_QAP_PRODUCT_VERSION_ID" query-param="WSO2_QAP_PRODUCT_VERSION_ID"/>
+      </call-query>
+   </operation>
+   <operation name="delete_WSO2_QAP_PRODUCT_VERSION_operation">
+      <call-query href="delete_WSO2_QAP_PRODUCT_VERSION_query">
+         <with-param name="WSO2_QAP_PRODUCT_VERSION_ID" query-param="WSO2_QAP_PRODUCT_VERSION_ID"/>
+      </call-query>
+   </operation>
+   <operation name="insert_WSO2_QAP_PRODUCT_VERSION_operation">
+      <call-query href="insert_WSO2_QAP_PRODUCT_VERSION_query">
+         <with-param name="WSO2_QAP_PRODUCT_VERSION" query-param="WSO2_QAP_PRODUCT_VERSION"/>
+         <with-param name="WSO2_QAP_PRODUCT_ID" query-param="WSO2_QAP_PRODUCT_ID"/>
+      </call-query>
+   </operation>
+   <operation name="update_WSO2_QAP_PRODUCT_VERSION_operation">
+      <call-query href="update_WSO2_QAP_PRODUCT_VERSION_query">
+         <with-param name="WSO2_QAP_PRODUCT_VERSION" query-param="WSO2_QAP_PRODUCT_VERSION"/>
+         <with-param name="WSO2_QAP_PRODUCT_VERSION_ID" query-param="WSO2_QAP_PRODUCT_VERSION_ID"/>
+         <with-param name="WSO2_QAP_PRODUCT_ID" query-param="WSO2_QAP_PRODUCT_ID"/>
+      </call-query>
+   </operation>
+   <operation name="select_all_WSO2_QAP_PRODUCT_VERSION_operation">
+      <call-query href="select_all_WSO2_QAP_PRODUCT_VERSION_query"/>
+   </operation>
+   <resource method="GET" path="view/product_version">
+      <call-query href="select_all_WSO2_QAP_PRODUCT_VERSION_query">      </call-query>
+   </resource>
+   <resource method="GET" path="get/version_by_id/{WSO2_QAP_PRODUCT_ID}">
+      <call-query href="select_with_key_WSO2_QAP_PRODUCT_ID_query">
+         <with-param name="WSO2_QAP_PRODUCT_ID" query-param="WSO2_QAP_PRODUCT_ID"/>
+      </call-query>
+   </resource>
+   <resource method="POST" path="add/product_version">
+      <call-query href="insert_WSO2_QAP_PRODUCT_VERSION_query">
+         <with-param name="WSO2_QAP_PRODUCT_ID" query-param="WSO2_QAP_PRODUCT_ID"/>
+         <with-param name="WSO2_QAP_PRODUCT_VERSION" query-param="WSO2_QAP_PRODUCT_VERSION"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="get/details_by_version_id/{WSO2_QAP_PRODUCT_VERSION_ID}">
+      <call-query href="select_with_key_WSO2_QAP_PRODUCT_VERSION_query">
+         <with-param name="WSO2_QAP_PRODUCT_VERSION_ID" query-param="WSO2_QAP_PRODUCT_VERSION_ID"/>
+      </call-query>
+   </resource>
+   <resource method="DELETE" path="delete/product_version/{WSO2_QAP_PRODUCT_VERSION_ID}">
+      <call-query href="delete_WSO2_QAP_PRODUCT_VERSION_query">
+         <with-param name="WSO2_QAP_PRODUCT_VERSION_ID" query-param="WSO2_QAP_PRODUCT_VERSION_ID"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="get/details_by_version_id_version_join_product/{WSO2_QAP_PRODUCT_VERSION_ID}">
+      <call-query href="select_with_version_key_VERSION_JOIN_PRODUCT">
+         <with-param name="WSO2_QAP_PRODUCT_VERSION_ID" query-param="WSO2_QAP_PRODUCT_VERSION_ID"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="get/details_by_version_id_version_join_build/{WSO2_QAP_PRODUCT_VERSION_ID}">
+      <call-query href="select_with_version_key_VERSION_JOIN_BUILD">
+         <with-param name="WSO2_QAP_PRODUCT_VERSION_ID" query-param="WSO2_QAP_PRODUCT_VERSION_ID"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="get/details_by_version_id_version_join_feature/{WSO2_QAP_PRODUCT_VERSION_ID}">
+      <call-query href="select_with_version_key_VERSION_JOIN_FEATURE">
+         <with-param name="WSO2_QAP_PRODUCT_VERSION_ID" query-param="WSO2_QAP_PRODUCT_VERSION_ID"/>
+      </call-query>
+   </resource>
+</data>

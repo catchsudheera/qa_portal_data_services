@@ -1,0 +1,26 @@
+<data description="multiple services per each table" enableBatchRequests="false" enableBoxcarring="false" name="WSO2_QAP_SAMPLE_FEATURE_MAPPING_DataService" serviceNamespace="http://ws.wso2.org/dataservice" serviceStatus="active">
+   <config id="default">
+      <property name="carbon_datasource_name">wso2_mysql_qa_portal</property>
+   </config>
+   <query id="insert_WSO2_QAP_SAMPLE_FEATURE_MAPPING_query" useConfig="default">
+      <sql>INSERT INTO WSO2_QAP_SAMPLE_FEATURE_MAPPING(WSO2_QAP_FEATURE_ID,WSO2_QAP_SAMPLE_ID) VALUES(?,?)</sql>
+      <param name="WSO2_QAP_FEATURE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_SAMPLE_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="select_all_WSO2_QAP_SAMPLE_FEATURE_MAPPING_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_FEATURE_ID, WSO2_QAP_SAMPLE_ID FROM WSO2_QAP_SAMPLE_FEATURE_MAPPING</sql>
+      <result element="WSO2_QAP_SAMPLE_FEATURE_MAPPINGCollection" rowName="WSO2_QAP_SAMPLE_FEATURE_MAPPING">
+         <element column="WSO2_QAP_FEATURE_ID" name="WSO2_QAP_FEATURE_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_SAMPLE_ID" name="WSO2_QAP_SAMPLE_ID" xsdType="xs:integer"/>
+      </result>
+   </query>
+   <operation name="insert_WSO2_QAP_SAMPLE_FEATURE_MAPPING_operation">
+      <call-query href="insert_WSO2_QAP_SAMPLE_FEATURE_MAPPING_query">
+         <with-param name="WSO2_QAP_SAMPLE_ID" query-param="WSO2_QAP_SAMPLE_ID"/>
+         <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
+      </call-query>
+   </operation>
+   <operation name="select_all_WSO2_QAP_SAMPLE_FEATURE_MAPPING_operation">
+      <call-query href="select_all_WSO2_QAP_SAMPLE_FEATURE_MAPPING_query"/>
+   </operation>
+</data>

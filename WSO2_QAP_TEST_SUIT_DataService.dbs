@@ -1,0 +1,65 @@
+<data description="multiple services per each table" enableBatchRequests="false" enableBoxcarring="false" name="WSO2_QAP_TEST_SUIT_DataService" serviceNamespace="http://ws.wso2.org/dataservice" serviceStatus="active">
+   <config id="default">
+      <property name="carbon_datasource_name">wso2_mysql_qa_portal</property>
+   </config>
+   <query id="select_all_WSO2_QAP_TEST_SUIT_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_TEST_SUIT_ID, WSO2_QAP_FEATURE_ID, WSO2_QAP_TEST_SUIT_NAME FROM WSO2_QAP_TEST_SUIT</sql>
+      <result element="WSO2_QAP_TEST_SUITCollection" rowName="WSO2_QAP_TEST_SUIT">
+         <element column="WSO2_QAP_TEST_SUIT_ID" name="WSO2_QAP_TEST_SUIT_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_FEATURE_ID" name="WSO2_QAP_FEATURE_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_TEST_SUIT_NAME" name="WSO2_QAP_TEST_SUIT_NAME" xsdType="xs:string"/>
+      </result>
+   </query>
+   <query id="select_with_key_WSO2_QAP_TEST_SUIT_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_TEST_SUIT_ID, WSO2_QAP_FEATURE_ID, WSO2_QAP_TEST_SUIT_NAME FROM WSO2_QAP_TEST_SUIT WHERE WSO2_QAP_TEST_SUIT_ID=?</sql>
+      <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_TEST_SUITCollection" rowName="WSO2_QAP_TEST_SUIT">
+         <element column="WSO2_QAP_TEST_SUIT_ID" name="WSO2_QAP_TEST_SUIT_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_FEATURE_ID" name="WSO2_QAP_FEATURE_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_TEST_SUIT_NAME" name="WSO2_QAP_TEST_SUIT_NAME" xsdType="xs:string"/>
+      </result>
+   </query>
+   <query id="update_WSO2_QAP_TEST_SUIT_query" useConfig="default">
+      <sql>UPDATE WSO2_QAP_TEST_SUIT SET WSO2_QAP_FEATURE_ID=?,WSO2_QAP_TEST_SUIT_NAME=? WHERE WSO2_QAP_TEST_SUIT_ID=?</sql>
+      <param name="WSO2_QAP_FEATURE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_TEST_SUIT_NAME" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="insert_WSO2_QAP_TEST_SUIT_query" useConfig="default">
+      <sql>INSERT INTO WSO2_QAP_TEST_SUIT(WSO2_QAP_TEST_SUIT_ID,WSO2_QAP_FEATURE_ID,WSO2_QAP_TEST_SUIT_NAME) VALUES(?,?,?)</sql>
+      <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_FEATURE_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_TEST_SUIT_NAME" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+   </query>
+   <query id="delete_WSO2_QAP_TEST_SUIT_query" useConfig="default">
+      <sql>DELETE FROM WSO2_QAP_TEST_SUIT WHERE WSO2_QAP_TEST_SUIT_ID=?</sql>
+      <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <operation name="select_with_key_WSO2_QAP_TEST_SUIT_operation">
+      <call-query href="select_with_key_WSO2_QAP_TEST_SUIT_query">
+         <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
+      </call-query>
+   </operation>
+   <operation name="select_all_WSO2_QAP_TEST_SUIT_operation">
+      <call-query href="select_all_WSO2_QAP_TEST_SUIT_query"/>
+   </operation>
+   <operation name="update_WSO2_QAP_TEST_SUIT_operation">
+      <call-query href="update_WSO2_QAP_TEST_SUIT_query">
+         <with-param name="WSO2_QAP_TEST_SUIT_NAME" query-param="WSO2_QAP_TEST_SUIT_NAME"/>
+         <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
+         <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
+      </call-query>
+   </operation>
+   <operation name="delete_WSO2_QAP_TEST_SUIT_operation">
+      <call-query href="delete_WSO2_QAP_TEST_SUIT_query">
+         <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
+      </call-query>
+   </operation>
+   <operation name="insert_WSO2_QAP_TEST_SUIT_operation">
+      <call-query href="insert_WSO2_QAP_TEST_SUIT_query">
+         <with-param name="WSO2_QAP_TEST_SUIT_NAME" query-param="WSO2_QAP_TEST_SUIT_NAME"/>
+         <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
+         <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
+      </call-query>
+   </operation>
+</data>

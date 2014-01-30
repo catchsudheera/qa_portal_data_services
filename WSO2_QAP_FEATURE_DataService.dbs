@@ -1,0 +1,90 @@
+<data description="multiple services per each table" enableBatchRequests="false" enableBoxcarring="false" name="WSO2_QAP_FEATURE_DataService" serviceNamespace="http://ws.wso2.org/dataservice" serviceStatus="active">
+   <config id="default">
+      <property name="carbon_datasource_name">wso2_mysql_qa_portal</property>
+   </config>
+   <query id="update_WSO2_QAP_FEATURE_query" useConfig="default">
+      <sql>UPDATE WSO2_QAP_FEATURE SET WSO2_QAP_DESCRIPTION=?,WSO2_QAP_REDMINE_URL=?,WSO2_QAP_SAMPLE_ID=? WHERE WSO2_QAP_FEATURE_ID=?</sql>
+      <param name="WSO2_QAP_DESCRIPTION" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="WSO2_QAP_REDMINE_URL" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="WSO2_QAP_SAMPLE_ID" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_FEATURE_ID" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="insert_WSO2_QAP_FEATURE_query" useConfig="default">
+      <sql>INSERT INTO WSO2_QAP_FEATURE(WSO2_QAP_DESCRIPTION,WSO2_QAP_REDMINE_URL,WSO2_QAP_SAMPLE_ID) VALUES(?,?,?)</sql>
+      <param name="WSO2_QAP_DESCRIPTION" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="WSO2_QAP_REDMINE_URL" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="WSO2_QAP_SAMPLE_ID" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="delete_WSO2_QAP_FEATURE_query" useConfig="default">
+      <sql>DELETE FROM WSO2_QAP_FEATURE WHERE WSO2_QAP_FEATURE_ID=?</sql>
+      <param name="WSO2_QAP_FEATURE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="select_with_key_WSO2_QAP_FEATURE_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_FEATURE_ID, WSO2_QAP_DESCRIPTION, WSO2_QAP_REDMINE_URL, WSO2_QAP_SAMPLE_ID FROM WSO2_QAP_FEATURE WHERE WSO2_QAP_FEATURE_ID=?</sql>
+      <param name="WSO2_QAP_FEATURE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_FEATURECollection" rowName="WSO2_QAP_FEATURE">
+         <element column="WSO2_QAP_FEATURE_ID" name="WSO2_QAP_FEATURE_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
+         <element column="WSO2_QAP_REDMINE_URL" name="WSO2_QAP_REDMINE_URL" xsdType="xs:string"/>
+         <element column="WSO2_QAP_SAMPLE_ID" name="WSO2_QAP_SAMPLE_ID" xsdType="xs:integer"/>
+      </result>
+   </query>
+   <query id="select_sample_with_key_WSO2_QAP_FEATURE_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_SAMPLE_NAME FROM WSO2_QAP_SAMPLE INNER JOIN WSO2_QAP_FEATURE ON WSO2_QAP_SAMPLE.WSO2_QAP_SAMPLE_ID = WSO2_QAP_FEATURE.WSO2_QAP_SAMPLE_ID WHERE WSO2_QAP_FEATURE_ID =?</sql>
+      <param name="WSO2_QAP_FEATURE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_FEATURECollection" rowName="WSO2_QAP_FEATURE">
+         <element column="WSO2_QAP_SAMPLE_NAME" name="WSO2_QAP_SAMPLE_NAME" xsdType="xs:string"/>
+      </result>
+   </query>
+   <query id="select_all_WSO2_QAP_FEATURE_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_FEATURE_ID, WSO2_QAP_DESCRIPTION, WSO2_QAP_REDMINE_URL, WSO2_QAP_SAMPLE_ID FROM WSO2_QAP_FEATURE</sql>
+      <result element="WSO2_QAP_FEATURECollection" rowName="WSO2_QAP_FEATURE">
+         <element column="WSO2_QAP_FEATURE_ID" name="WSO2_QAP_FEATURE_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
+         <element column="WSO2_QAP_REDMINE_URL" name="WSO2_QAP_REDMINE_URL" xsdType="xs:string"/>
+         <element column="WSO2_QAP_SAMPLE_ID" name="WSO2_QAP_SAMPLE_ID" xsdType="xs:integer"/>
+      </result>
+   </query>
+   <operation name="delete_WSO2_QAP_FEATURE_operation">
+      <call-query href="delete_WSO2_QAP_FEATURE_query">
+         <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
+      </call-query>
+   </operation>
+   <operation name="select_all_WSO2_QAP_FEATURE_operation">
+      <call-query href="select_all_WSO2_QAP_FEATURE_query"/>
+   </operation>
+   <operation name="insert_WSO2_QAP_FEATURE_operation">
+      <call-query href="insert_WSO2_QAP_FEATURE_query">
+         <with-param name="WSO2_QAP_SAMPLE_ID" query-param="WSO2_QAP_SAMPLE_ID"/>
+         <with-param name="WSO2_QAP_REDMINE_URL" query-param="WSO2_QAP_REDMINE_URL"/>
+         <with-param name="WSO2_QAP_DESCRIPTION" query-param="WSO2_QAP_DESCRIPTION"/>
+      </call-query>
+   </operation>
+   <operation name="select_with_key_WSO2_QAP_FEATURE_operation">
+      <call-query href="select_with_key_WSO2_QAP_FEATURE_query">
+         <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
+      </call-query>
+   </operation>
+   <operation name="update_WSO2_QAP_FEATURE_operation">
+      <call-query href="update_WSO2_QAP_FEATURE_query">
+         <with-param name="WSO2_QAP_SAMPLE_ID" query-param="WSO2_QAP_SAMPLE_ID"/>
+         <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
+         <with-param name="WSO2_QAP_REDMINE_URL" query-param="WSO2_QAP_REDMINE_URL"/>
+         <with-param name="WSO2_QAP_DESCRIPTION" query-param="WSO2_QAP_DESCRIPTION"/>
+      </call-query>
+   </operation>
+   <resource method="GET" path="view/features"> 
+     <call-query href="select_all_WSO2_QAP_FEATURE_query">
+     </call-query> 
+   </resource> 
+   <resource method="GET" path="view/feature_by_id/{WSO2_QAP_FEATURE_ID}"> 
+     <call-query href="select_with_key_WSO2_QAP_FEATURE_query">
+      <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
+     </call-query> 
+   </resource> 
+   <resource method="GET" path="view/sample_by_feature_id/{WSO2_QAP_FEATURE_ID}"> 
+     <call-query href="select_sample_with_key_WSO2_QAP_FEATURE_query">
+      <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
+     </call-query> 
+   </resource> 
+</data>
