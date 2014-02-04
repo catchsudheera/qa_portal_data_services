@@ -23,6 +23,14 @@
          <element column="WSO2_QAP_PLANNING_STATUS" name="WSO2_QAP_PLANNING_STATUS" xsdType="xs:string"/>
       </result>
    </query>
+   <query id="select_with_versionid_WSO2_QAP_TEST_PLAN_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_TEST_PLAN_ID,WSO2_QAP_PLANNING_STATUS FROM WSO2_QAP_TEST_PLAN WHERE WSO2_QAP_PRODUCT_VERSION_ID=?</sql>
+      <param name="WSO2_QAP_PRODUCT_VERSION_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_TEST_PLANCollection" rowName="WSO2_QAP_TEST_PLAN">
+         <element column="WSO2_QAP_TEST_PLAN_ID" name="WSO2_QAP_TEST_PLAN_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_PLANNING_STATUS" name="WSO2_QAP_PLANNING_STATUS" xsdType="xs:string"/>
+      </result>
+   </query>
    <query id="update_WSO2_QAP_TEST_PLAN_query" useConfig="default">
       <sql>UPDATE WSO2_QAP_TEST_PLAN SET WSO2_QAP_PRODUCT_VERSION_ID=?,WSO2_QAP_PLANNING_STATUS=? WHERE WSO2_QAP_TEST_PLAN_ID=?</sql>
       <param name="WSO2_QAP_PRODUCT_VERSION_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
@@ -67,6 +75,16 @@
    <resource method="GET" path="view/test_plan_by_id/{WSO2_QAP_TEST_PLAN_ID}">
       <call-query href="select_with_key_WSO2_QAP_TEST_PLAN_query">   
       <with-param name="WSO2_QAP_TEST_PLAN_ID" query-param="WSO2_QAP_TEST_PLAN_ID"/>                                  
+      </call-query>
+   </resource>
+   <resource method="GET" path="view/test_plan_by_version_id/{WSO2_QAP_PRODUCT_VERSION_ID}">
+      <call-query href="select_with_versionid_WSO2_QAP_TEST_PLAN_query">   
+      <with-param name="WSO2_QAP_PRODUCT_VERSION_ID" query-param="WSO2_QAP_PRODUCT_VERSION_ID"/>                                  
+      </call-query>
+   </resource>
+   <resource method="DELETE" path="delete/version_test_plans/{WSO2_QAP_TEST_PLAN_ID}">
+      <call-query href="delete_WSO2_QAP_TEST_PLAN_query">
+         <with-param name="WSO2_QAP_TEST_PLAN_ID" query-param="WSO2_QAP_TEST_PLAN_ID"/>
       </call-query>
    </resource>
 </data>

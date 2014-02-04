@@ -23,4 +23,10 @@
    <operation name="select_all_WSO2_QAP_PRODUCT_VERSION_FEATURE_MAPPING_operation">
       <call-query href="select_all_WSO2_QAP_PRODUCT_VERSION_FEATURE_MAPPING_query"/>
    </operation>
+   <resource method="POST" path="add/productfeature">
+      <call-query href="insert_WSO2_QAP_PRODUCT_VERSION_FEATURE_MAPPING_query">
+         <with-param name="WSO2_QAP_PRODUCT_VERSION_ID" query-param="WSO2_QAP_PRODUCT_VERSION_ID"/>
+         <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
+      </call-query>
+   </resource>
 </data>

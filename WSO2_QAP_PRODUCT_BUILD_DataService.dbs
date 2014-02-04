@@ -103,4 +103,9 @@
 		<with-param name="WSO2_QAP_BUILD_ID" query-param="WSO2_QAP_BUILD_ID"/>                                  
       </call-query>
    </resource>
+   <resource method="DELETE" path="delete/version_build/{WSO2_QAP_BUILD_ID}">
+      <call-query href="delete_WSO2_QAP_PRODUCT_BUILD_query">
+         <with-param name="WSO2_QAP_BUILD_ID" query-param="WSO2_QAP_BUILD_ID"/>
+      </call-query>
+   </resource>
 </data>

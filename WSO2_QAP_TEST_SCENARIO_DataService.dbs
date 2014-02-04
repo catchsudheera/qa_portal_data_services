@@ -34,30 +34,27 @@
       <param name="WSO2_QAP_TEST_SCENARIO_NAME" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
       <param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
    </query>
-   <operation name="update_WSO2_QAP_TEST_SCENARIO_operation">
-      <call-query href="update_WSO2_QAP_TEST_SCENARIO_query">
-         <with-param name="WSO2_QAP_TEST_SCENARIO_NAME" query-param="WSO2_QAP_TEST_SCENARIO_NAME"/>
-         <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
-         <with-param name="WSO2_QAP_DESCRIPTION" query-param="WSO2_QAP_DESCRIPTION"/>
+   
+   <resource method="GET" path="view/testscenario">
+      <call-query href="select_all_WSO2_QAP_TEST_SCENARIO_query">                                     
       </call-query>
-   </operation>
-   <operation name="delete_WSO2_QAP_TEST_SCENARIO_operation">
+   </resource>
+   <resource method="DELETE" path="delete/testscenario/{WSO2_QAP_TEST_SCENARIO_ID}">
       <call-query href="delete_WSO2_QAP_TEST_SCENARIO_query">
          <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
       </call-query>
-   </operation>
-   <operation name="insert_WSO2_QAP_TEST_SCENARIO_operation">
+   </resource>
+   <resource method="POST" path="add/testscenario">
       <call-query href="insert_WSO2_QAP_TEST_SCENARIO_query">
-         <with-param name="WSO2_QAP_TEST_SCENARIO_NAME" query-param="WSO2_QAP_TEST_SCENARIO_NAME"/>
          <with-param name="WSO2_QAP_DESCRIPTION" query-param="WSO2_QAP_DESCRIPTION"/>
+         <with-param name="WSO2_QAP_TEST_SCENARIO_NAME" query-param="WSO2_QAP_TEST_SCENARIO_NAME"/>
       </call-query>
-   </operation>
-   <operation name="select_with_key_WSO2_QAP_TEST_SCENARIO_operation">
-      <call-query href="select_with_key_WSO2_QAP_TEST_SCENARIO_query">
-         <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
+   </resource>
+   
+    <resource method="GET" path="view/testscenario_withh_id">
+      <call-query href="select_with_key_WSO2_QAP_TEST_SCENARIO_query"> 
+      <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>                                    
       </call-query>
-   </operation>
-   <operation name="select_all_WSO2_QAP_TEST_SCENARIO_operation">
-      <call-query href="select_all_WSO2_QAP_TEST_SCENARIO_query"/>
-   </operation>
+   </resource>
 </data>
+

@@ -96,4 +96,9 @@
          <with-param name="WSO2_QAP_TEST_CASE_ID" query-param="WSO2_QAP_TEST_CASE_ID"/>
       </call-query>
    </resource>
+   <resource method="GET" path="view/testcase_by_id/{WSO2_QAP_TEST_CASE_ID}">
+      <call-query href="select_with_key_WSO2_QAP_TEST_CASE_query">
+         <with-param name="WSO2_QAP_TEST_CASE_ID" query-param="WSO2_QAP_TEST_CASE_ID"/>
+      </call-query>
+   </resource>
 </data>

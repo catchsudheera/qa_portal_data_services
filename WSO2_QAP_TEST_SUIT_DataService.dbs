@@ -26,8 +26,7 @@
       <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
    </query>
    <query id="insert_WSO2_QAP_TEST_SUIT_query" useConfig="default">
-      <sql>INSERT INTO WSO2_QAP_TEST_SUIT(WSO2_QAP_TEST_SUIT_ID,WSO2_QAP_FEATURE_ID,WSO2_QAP_TEST_SUIT_NAME) VALUES(?,?,?)</sql>
-      <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <sql>INSERT INTO WSO2_QAP_TEST_SUIT(WSO2_QAP_FEATURE_ID,WSO2_QAP_TEST_SUIT_NAME) VALUES(?,?)</sql>
       <param name="WSO2_QAP_FEATURE_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <param name="WSO2_QAP_TEST_SUIT_NAME" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
    </query>
@@ -59,7 +58,12 @@
       <call-query href="insert_WSO2_QAP_TEST_SUIT_query">
          <with-param name="WSO2_QAP_TEST_SUIT_NAME" query-param="WSO2_QAP_TEST_SUIT_NAME"/>
          <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
-         <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
       </call-query>
    </operation>
+   <resource method="POST" path="add/test_suit">
+      <call-query href="insert_WSO2_QAP_TEST_SUIT_query">
+         <with-param name="WSO2_QAP_TEST_SUIT_NAME" query-param="WSO2_QAP_TEST_SUIT_NAME"/>
+         <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
+      </call-query>
+   </resource>
 </data>
