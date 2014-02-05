@@ -39,7 +39,7 @@
       </result>
    </query>
    <query id="select_with_artifactId_WSO2_QAP_TEST_CASE_query" useConfig="default">
-      <sql>SELECT WSO2_QAP_TEST_CASE_ID,WSO2_QAP_TEST_CASE_NAME, WSO2_QAP_DESCRIPTION, WSO2_QAP_AUTOMATION_STATUS, FROM WSO2_QAP_TEST_CASE WHERE WSO2_QAP_QA_ARTIFACT_ID=?</sql>
+      <sql>SELECT WSO2_QAP_TEST_CASE_ID, WSO2_QAP_TEST_CASE_NAME, WSO2_QAP_DESCRIPTION, WSO2_QAP_AUTOMATION_STATUS FROM WSO2_QAP_TEST_CASE WHERE WSO2_QAP_QA_ARTIFACT_ID=?</sql>
       <param name="WSO2_QAP_QA_ARTIFACT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <result element="WSO2_QAP_TEST_CASECollection" rowName="WSO2_QAP_TEST_CASE">
          <element column="WSO2_QAP_TEST_CASE_ID" name="WSO2_QAP_TEST_CASE_ID" xsdType="xs:integer"/>
