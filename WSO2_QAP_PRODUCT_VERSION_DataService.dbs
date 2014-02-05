@@ -60,11 +60,12 @@
       </result>
    </query>
    <query id="select_with_version_key_VERSION_JOIN_PRODUCT" useConfig="default">
-      <sql>SELECT WSO2_QAP_PRODUCT_VERSION,WSO2_QAP_PRODUCT_NAME FROM WSO2_QAP_PRODUCT_VERSION NATURAL JOIN WSO2_QAP_PRODUCT WHERE 	WSO2_QAP_PRODUCT_VERSION_ID=?</sql>
+      <sql>SELECT WSO2_QAP_PRODUCT_VERSION,WSO2_QAP_PRODUCT_NAME,WSO2_QAP_PRODUCT_ID FROM WSO2_QAP_PRODUCT_VERSION NATURAL JOIN WSO2_QAP_PRODUCT WHERE 	WSO2_QAP_PRODUCT_VERSION_ID=?</sql>
       <param name="WSO2_QAP_PRODUCT_VERSION_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <result element="WSO2_QAP_PRODUCT_VERSIONCollection" rowName="WSO2_QAP_PRODUCT_VERSION">
          <element column="WSO2_QAP_PRODUCT_VERSION" name="WSO2_QAP_PRODUCT_VERSION" xsdType="xs:string"/>
          <element column="WSO2_QAP_PRODUCT_NAME" name="WSO2_QAP_PRODUCT_NAME" xsdType="xs:string"/>
+         <element column="WSO2_QAP_PRODUCT_ID" name="WSO2_QAP_PRODUCT_ID" xsdType="xs:integer"/>
       </result>
    </query>
    <query id="insert_WSO2_QAP_PRODUCT_VERSION_query" useConfig="default">

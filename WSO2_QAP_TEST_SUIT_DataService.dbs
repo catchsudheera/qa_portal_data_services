@@ -10,6 +10,34 @@
          <element column="WSO2_QAP_TEST_SUIT_NAME" name="WSO2_QAP_TEST_SUIT_NAME" xsdType="xs:string"/>
       </result>
    </query>
+   <query id="select_all_DATA_TESTSUIT_join_TESTPLAN_query" useConfig="default">
+      <sql>SELECT DISTINCT WSO2_QAP_TEST_SUIT_ID, WSO2_QAP_TEST_PLAN_ID, WSO2_QAP_PRODUCT_VERSION_ID, WSO2_QAP_PLANNING_STATUS, WSO2_QAP_FEATURE_ID, WSO2_QAP_TEST_SUIT_NAME, WSO2_QAP_PRODUCT_VERSION,
+      WSO2_QAP_PRODUCT_ID, WSO2_QAP_PRODUCT_NAME FROM WSO2_QAP_TESTPLAN_MAPPING_TESTSUIT NATURAL JOIN WSO2_QAP_TEST_PLAN NATURAL JOIN WSO2_QAP_TEST_SUIT NATURAL JOIN WSO2_QAP_PRODUCT_VERSION NATURAL JOIN WSO2_QAP_PRODUCT WHERE WSO2_QAP_TEST_SUIT_ID=?</sql>
+      <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_DATA_TESTSUIT_join_TESTPLANCollection" rowName="WSO2_QAP_DATA_TESTSUIT_join_TESTPLAN">
+         <element column="WSO2_QAP_TEST_SUIT_ID" name="WSO2_QAP_TEST_SUIT_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_TEST_PLAN_ID" name="WSO2_QAP_TEST_PLAN_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_PRODUCT_VERSION_ID" name="WSO2_QAP_PRODUCT_VERSION_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_FEATURE_ID" name="WSO2_QAP_FEATURE_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_TEST_SUIT_NAME" name="WSO2_QAP_TEST_SUIT_NAME" xsdType="xs:string"/>
+         <element column="WSO2_QAP_PLANNING_STATUS" name="WSO2_QAP_PLANNING_STATUS" xsdType="xs:string"/>
+         <element column="WSO2_QAP_PRODUCT_VERSION" name="WSO2_QAP_PRODUCT_VERSION" xsdType="xs:string"/>
+         <element column="WSO2_QAP_PRODUCT_ID" name="WSO2_QAP_PRODUCT_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_PRODUCT_NAME" name="WSO2_QAP_PRODUCT_NAME" xsdType="xs:string"/>
+      </result>
+   </query>
+   <query id="select_all_DATA_TESTSUIT_join_TESTSCENARIO_query" useConfig="default">
+      <sql>SELECT DISTINCT WSO2_QAP_TEST_SUIT_ID, WSO2_QAP_FEATURE_ID, WSO2_QAP_TEST_SCENARIO_ID, WSO2_QAP_TEST_SUIT_NAME, WSO2_QAP_DESCRIPTION, WSO2_QAP_TEST_SCENARIO_NAME FROM WSO2_QAP_TEST_SCENARIO NATURAL JOIN WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING NATURAL JOIN WSO2_QAP_TEST_SUIT WHERE WSO2_QAP_TEST_SUIT_ID=?</sql>
+      <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_DATA_TESTSUIT_join_TESTSCENARIOCollection" rowName="WSO2_QAP_DATA_TESTSUIT_join_TESTSCENARIO">
+         <element column="WSO2_QAP_TEST_SUIT_ID" name="WSO2_QAP_TEST_SUIT_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_FEATURE_ID" name="WSO2_QAP_FEATURE_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_TEST_SCENARIO_ID" name="WSO2_QAP_TEST_SCENARIO_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_TEST_SUIT_NAME" name="WSO2_QAP_TEST_SUIT_NAME" xsdType="xs:string"/>
+         <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
+         <element column="WSO2_QAP_TEST_SCENARIO_NAME" name="WSO2_QAP_TEST_SCENARIO_NAME" xsdType="xs:string"/>
+      </result>
+   </query>
    <query id="select_with_key_WSO2_QAP_TEST_SUIT_query" useConfig="default">
       <sql>SELECT WSO2_QAP_TEST_SUIT_ID, WSO2_QAP_FEATURE_ID, WSO2_QAP_TEST_SUIT_NAME FROM WSO2_QAP_TEST_SUIT WHERE WSO2_QAP_TEST_SUIT_ID=?</sql>
       <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
@@ -33,6 +61,15 @@
    <query id="delete_WSO2_QAP_TEST_SUIT_query" useConfig="default">
       <sql>DELETE FROM WSO2_QAP_TEST_SUIT WHERE WSO2_QAP_TEST_SUIT_ID=?</sql>
       <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="select_with_feature_id_WSO2_QAP_TEST_SUIT_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_TEST_SUIT_ID, WSO2_QAP_FEATURE_ID, WSO2_QAP_TEST_SUIT_NAME FROM WSO2_QAP_TEST_SUIT WHERE WSO2_QAP_FEATURE_ID=?</sql>
+      <param name="WSO2_QAP_FEATURE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_TEST_SUITCollection" rowName="WSO2_QAP_TEST_SUIT">
+         <element column="WSO2_QAP_TEST_SUIT_ID" name="WSO2_QAP_TEST_SUIT_ID" xsdType="xs:integer"/>
+         <param name="WSO2_QAP_FEATURE_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+         <element column="WSO2_QAP_TEST_SUIT_NAME" name="WSO2_QAP_TEST_SUIT_NAME" xsdType="xs:string"/>
+      </result>
    </query>
    <operation name="select_with_key_WSO2_QAP_TEST_SUIT_operation">
       <call-query href="select_with_key_WSO2_QAP_TEST_SUIT_query">
@@ -64,6 +101,26 @@
       <call-query href="insert_WSO2_QAP_TEST_SUIT_query">
          <with-param name="WSO2_QAP_TEST_SUIT_NAME" query-param="WSO2_QAP_TEST_SUIT_NAME"/>
          <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="view/test_suit_by_feature/{WSO2_QAP_FEATURE_ID}">
+      <call-query href="select_with_feature_id_WSO2_QAP_TEST_SUIT_query">
+         <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="get/testsuit_join_testplan_by_testsuit_id/{WSO2_QAP_TEST_SUIT_ID}">
+      <call-query href="select_all_DATA_TESTSUIT_join_TESTPLAN_query">  
+         <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="get/testsuit_join_testscenario_by_testsuit_id/{WSO2_QAP_TEST_SUIT_ID}">
+      <call-query href="select_all_DATA_TESTSUIT_join_TESTSCENARIO_query">  
+         <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
+      </call-query>
+   </resource>
+   <resource method="DELETE" path="delete/testsuit/{WSO2_QAP_TEST_SUIT_ID}">
+      <call-query href="delete_WSO2_QAP_TEST_SUIT_query">
+         <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
       </call-query>
    </resource>
 </data>

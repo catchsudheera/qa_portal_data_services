@@ -2,5 +2,13 @@
    <config id="default">
       <property name="carbon_datasource_name">wso2_mysql_qa_portal</property>
    </config>
-
+   <query id="delete_WSO2_QAP_JIRA_query" useConfig="default">
+      <sql>DELETE FROM WSO2_QAP_JIRA WHERE WSO2_QAP_JIRA_ID=?</sql>
+      <param name="WSO2_QAP_JIRA_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <resource method="DELETE" path="delete/jira/{WSO2_QAP_JIRA_ID}">
+      <call-query href="delete_WSO2_QAP_JIRA_query">  
+         <with-param name="WSO2_QAP_JIRA_ID" query-param="WSO2_QAP_JIRA_ID"/>
+      </call-query>
+   </resource>
 </data>

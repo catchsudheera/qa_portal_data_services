@@ -51,7 +51,7 @@
       </call-query>
    </resource>
    
-    <resource method="GET" path="view/testscenario_withh_id">
+    <resource method="GET" path="view/testscenario_with_id">
       <call-query href="select_with_key_WSO2_QAP_TEST_SCENARIO_query"> 
       <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>                                    
       </call-query>
