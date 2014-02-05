@@ -17,6 +17,13 @@
       <param name="WSO2_QAP_RELEASE_DATE" ordinal="3" paramType="SCALAR" sqlType="DATE" type="IN"/>
       <param name="WSO2_QAP_TEST_PLAN_ID" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
    </query>
+   <query id="select_WSO2_QAP_TEST_PLAN_ID_from_WSO2_QAP_PRODUCT_VERSION_ID_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_TEST_PLAN_ID FROM WSO2_QAP_PRODUCT_VERSION NATURAL JOIN WSO2_QAP_TEST_PLAN WHERE WSO2_QAP_PRODUCT_VERSION_ID=?</sql>
+      <param name="WSO2_QAP_PRODUCT_VERSION_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_PRODUCT_VERSION_PLANCollection" rowName="WSO2_QAP_PRODUCT_VERSION_PLAN">
+         <element column="WSO2_QAP_TEST_PLAN_ID" name="WSO2_QAP_TEST_PLAN_ID" xsdType="xs:integer"/>
+      </result>
+   </query>
    <query id="select_all_WSO2_QAP_PRODUCT_BUILD_query" useConfig="default">
       <sql>SELECT WSO2_QAP_BUILD_ID, WSO2_QAP_PRODUCT_VERSION_ID, WSO2_QAP_BUILD_NAME, WSO2_QAP_RELEASE_DATE, WSO2_QAP_TEST_PLAN_ID FROM WSO2_QAP_PRODUCT_BUILD</sql>
       <result element="WSO2_QAP_PRODUCT_BUILDCollection" rowName="WSO2_QAP_PRODUCT_BUILD">
@@ -106,6 +113,11 @@
    <resource method="DELETE" path="delete/version_build/{WSO2_QAP_BUILD_ID}">
       <call-query href="delete_WSO2_QAP_PRODUCT_BUILD_query">
          <with-param name="WSO2_QAP_BUILD_ID" query-param="WSO2_QAP_BUILD_ID"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="get/planid_by_versionid/{WSO2_QAP_PRODUCT_VERSION_ID}">
+      <call-query href="select_WSO2_QAP_TEST_PLAN_ID_from_WSO2_QAP_PRODUCT_VERSION_ID_query">
+         <with-param name="WSO2_QAP_PRODUCT_VERSION_ID" query-param="WSO2_QAP_PRODUCT_VERSION_ID"/>
       </call-query>
    </resource>
 </data>
