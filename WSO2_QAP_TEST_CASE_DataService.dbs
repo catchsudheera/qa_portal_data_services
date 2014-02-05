@@ -46,7 +46,6 @@
          <element column="WSO2_QAP_TEST_CASE_NAME" name="WSO2_QAP_TEST_CASE_NAME" xsdType="xs:string"/>
          <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
          <element column="WSO2_QAP_AUTOMATION_STATUS" name="WSO2_QAP_AUTOMATION_STATUS" xsdType="xs:string"/>
-         <element column="WSO2_QAP_AUTOMATION_TEST_CASE_ID" name="WSO2_QAP_AUTOMATION_TEST_CASE_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_QA_ARTIFACT_ID" name="WSO2_QAP_QA_ARTIFACT_ID" xsdType="xs:integer"/>
       </result>
    </query>
