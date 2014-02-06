@@ -10,6 +10,16 @@
          <element column="WSO2_QAP_TEST_SUIT_NAME" name="WSO2_QAP_TEST_SUIT_NAME" xsdType="xs:string"/>
       </result>
    </query>
+   <query id="select_TESTSUIT_join_PLAN_MAPPING_SUIT_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_TEST_SUIT_ID, WSO2_QAP_FEATURE_ID, WSO2_QAP_TEST_SUIT_NAME FROM WSO2_QAP_TESTPLAN_MAPPING_TESTSUIT NATURAL JOIN WSO2_QAP_TEST_SUIT WHERE WSO2_QAP_TEST_PLAN_ID=?</sql>
+      <param name="WSO2_QAP_TEST_PLAN_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_TESTSUIT_join_PLAN_MAPPING_SUITCollection" rowName="WSO2_QAP_TESTSUIT_join_PLAN_MAPPING_SUIT">
+         <element column="WSO2_QAP_TEST_SUIT_ID" name="WSO2_QAP_TEST_SUIT_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_TEST_PLAN_ID" name="WSO2_QAP_TEST_PLAN_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_FEATURE_ID" name="WSO2_QAP_FEATURE_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_TEST_SUIT_NAME" name="WSO2_QAP_TEST_SUIT_NAME" xsdType="xs:string"/>
+      </result>
+   </query>
    <query id="select_all_DATA_TESTSUIT_join_TESTPLAN_query" useConfig="default">
       <sql>SELECT DISTINCT WSO2_QAP_TEST_SUIT_ID, WSO2_QAP_TEST_PLAN_ID, WSO2_QAP_PRODUCT_VERSION_ID, WSO2_QAP_PLANNING_STATUS, WSO2_QAP_FEATURE_ID, WSO2_QAP_TEST_SUIT_NAME, WSO2_QAP_PRODUCT_VERSION,
       WSO2_QAP_PRODUCT_ID, WSO2_QAP_PRODUCT_NAME FROM WSO2_QAP_TESTPLAN_MAPPING_TESTSUIT NATURAL JOIN WSO2_QAP_TEST_PLAN NATURAL JOIN WSO2_QAP_TEST_SUIT NATURAL JOIN WSO2_QAP_PRODUCT_VERSION NATURAL JOIN WSO2_QAP_PRODUCT WHERE WSO2_QAP_TEST_SUIT_ID=?</sql>
@@ -116,6 +126,11 @@
    <resource method="GET" path="get/testsuit_join_testscenario_by_testsuit_id/{WSO2_QAP_TEST_SUIT_ID}">
       <call-query href="select_all_DATA_TESTSUIT_join_TESTSCENARIO_query">  
          <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="get/testsuit_join_plan_mapping_suit_by_plan_id/{WSO2_QAP_TEST_PLAN_ID}">
+      <call-query href="select_TESTSUIT_join_PLAN_MAPPING_SUIT_query">  
+         <with-param name="WSO2_QAP_TEST_PLAN_ID" query-param="WSO2_QAP_TEST_PLAN_ID"/>
       </call-query>
    </resource>
    <resource method="DELETE" path="delete/testsuit/{WSO2_QAP_TEST_SUIT_ID}">
