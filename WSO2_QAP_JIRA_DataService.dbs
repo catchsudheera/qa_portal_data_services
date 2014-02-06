@@ -11,6 +11,14 @@
       <param name="WSO2_QAP_URL" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
       <param name="WSO2_QAP_DESCRIPTION" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
    </query>
+   <query id="select_all_WSO2_QAP_JIRA_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_JIRA_ID, WSO2_QAP_URL, WSO2_QAP_DESCRIPTION FROM WSO2_QAP_JIRA</sql>
+      <result element="WSO2_QAP_JIRACollection" rowName="WSO2_QAP_JIRA">
+         <element column="WSO2_QAP_JIRA_ID" name="WSO2_QAP_JIRA_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_URL" name="WSO2_QAP_URL" xsdType="xs:string"/>
+         <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
+      </result>
+   </query>
    <resource method="DELETE" path="delete/jira/{WSO2_QAP_JIRA_ID}">
       <call-query href="delete_WSO2_QAP_JIRA_query">  
          <with-param name="WSO2_QAP_JIRA_ID" query-param="WSO2_QAP_JIRA_ID"/>
@@ -20,6 +28,10 @@
       <call-query href="insert_WSO2_QAP_JIRA_query">
          <with-param name="WSO2_QAP_URL" query-param="WSO2_QAP_URL"/>
          <with-param name="WSO2_QAP_DESCRIPTION" query-param="WSO2_QAP_DESCRIPTION"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="view/jira">
+      <call-query href="select_all_WSO2_QAP_JIRA_query">                                     
       </call-query>
    </resource>
 </data>
