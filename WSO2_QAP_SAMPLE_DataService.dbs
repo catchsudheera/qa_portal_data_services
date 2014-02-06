@@ -22,12 +22,13 @@
       <param name="WSO2_QAP_SAMPLE_URL" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
    </query>
    <query id="select_with_key_WSO2_QAP_SAMPLE_query" useConfig="default">
-      <sql>SELECT WSO2_QAP_SAMPLE_ID, WSO2_QAP_SAMPLE_NAME, WSO2_QAP_DESCRIPTION FROM WSO2_QAP_SAMPLE WHERE WSO2_QAP_SAMPLE_ID=?</sql>
+      <sql>SELECT WSO2_QAP_SAMPLE_ID, WSO2_QAP_SAMPLE_NAME, WSO2_QAP_DESCRIPTION, WSO2_QAP_SAMPLE_URL FROM WSO2_QAP_SAMPLE WHERE WSO2_QAP_SAMPLE_ID=?</sql>
       <param name="WSO2_QAP_SAMPLE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <result element="WSO2_QAP_SAMPLECollection" rowName="WSO2_QAP_SAMPLE">
          <element column="WSO2_QAP_SAMPLE_ID" name="WSO2_QAP_SAMPLE_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_SAMPLE_NAME" name="WSO2_QAP_SAMPLE_NAME" xsdType="xs:string"/>
          <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
+         <element column="WSO2_QAP_SAMPLE_URL" name="WSO2_QAP_SAMPLE_URL" xsdType="xs:string"/>
       </result>
    </query>
    <query id="update_WSO2_QAP_SAMPLE_query" useConfig="default">
@@ -77,6 +78,12 @@
 
    <resource method="DELETE" path="delete/samples/{WSO2_QAP_SAMPLE_ID}">
        <call-query href="delete_WSO2_QAP_SAMPLE_query">
+         <with-param name="WSO2_QAP_SAMPLE_ID" query-param="WSO2_QAP_SAMPLE_ID"/>
+      </call-query>
+   </resource>
+
+   <resource method="GET" path="view/samples_with_id/{WSO2_QAP_SAMPLE_ID}">
+      <call-query href="select_with_key_WSO2_QAP_SAMPLE_query">
          <with-param name="WSO2_QAP_SAMPLE_ID" query-param="WSO2_QAP_SAMPLE_ID"/>
       </call-query>
    </resource>
