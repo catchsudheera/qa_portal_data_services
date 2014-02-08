@@ -1,0 +1,26 @@
+<data description="multiple services per each table" enableBatchRequests="false" enableBoxcarring="false" name="WSO2_QAP_BUILD_MAPPING_TESTRESULT_DataService" serviceNamespace="http://ws.wso2.org/dataservice" serviceStatus="active">
+   <config id="default">
+      <property name="carbon_datasource_name">wso2_mysql_qa_portal</property>
+   </config>
+   <query id="select_all_WSO2_QAP_BUILD_MAPPING_TESTRESULT_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_BUILD_ID, WSO2_QAP_TEST_RESULT_ID FROM WSO2_QAP_BUILD_MAPPING_TESTRESULT</sql>
+      <result element="WSO2_QAP_BUILD_MAPPING_TESTRESULTCollection" rowName="WSO2_QAP_BUILD_MAPPING_TESTRESULT">
+         <element column="WSO2_QAP_BUILD_ID" name="WSO2_QAP_BUILD_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_TEST_RESULT_ID" name="WSO2_QAP_TEST_RESULT_ID" xsdType="xs:integer"/>
+      </result>
+   </query>
+   <query id="insert_WSO2_QAP_BUILD_MAPPING_TESTRESULT_query" useConfig="default">
+      <sql>INSERT INTO WSO2_QAP_BUILD_MAPPING_TESTRESULT(WSO2_QAP_BUILD_ID,WSO2_QAP_TEST_RESULT_ID) VALUES(?,?)</sql>
+      <param name="WSO2_QAP_BUILD_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_TEST_RESULT_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <operation name="select_all_WSO2_QAP_BUILD_MAPPING_TESTRESULT_operation">
+      <call-query href="select_all_WSO2_QAP_BUILD_MAPPING_TESTRESULT_query"/>
+   </operation>
+   <operation name="insert_WSO2_QAP_BUILD_MAPPING_TESTRESULT_operation">
+      <call-query href="insert_WSO2_QAP_BUILD_MAPPING_TESTRESULT_query">
+         <with-param name="WSO2_QAP_BUILD_ID" query-param="WSO2_QAP_BUILD_ID"/>
+         <with-param name="WSO2_QAP_TEST_RESULT_ID" query-param="WSO2_QAP_TEST_RESULT_ID"/>
+      </call-query>
+   </operation>
+</data>

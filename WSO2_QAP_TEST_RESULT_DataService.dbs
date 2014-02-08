@@ -74,7 +74,6 @@
       <sql>DELETE FROM WSO2_QAP_TEST_RESULT WHERE WSO2_QAP_TEST_RESULT_ID=?</sql>
       <param name="WSO2_QAP_TEST_RESULT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
    </query>
-
    <query id="select_with_testcaseid_WSO2_QAP_TEST_RESULT_query" useConfig="default">
       <sql>SELECT WSO2_QAP_TEST_RESULT_ID, WSO2_QAP_TEST_STATUS, WSO2_QAP_AUTOMATION_TEST_RESULT, WSO2_QAP_JIRA, WSO2_QAP_TESTED_BY FROM WSO2_QAP_TEST_RESULT WHERE WSO2_QAP_TEST_CASE_ID=?</sql>
       <param name="WSO2_QAP_TEST_CASE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
@@ -86,11 +85,8 @@
          <element column="WSO2_QAP_TESTED_BY" name="WSO2_QAP_TESTED_BY" xsdType="xs:string"/>
       </result>
    </query>
-
    <query id="select_jira_with_id_WSO2_QAP_TEST_RESULT_query" useConfig="default">
-      <sql>SELECT WSO2_QAP_JIRA.WSO2_QAP_JIRA_ID, WSO2_QAP_URL, WSO2_QAP_DESCRIPTION FROM WSO2_QAP_TEST_RESULT, WSO2_QAP_JIRA_MAPPING_TESTRESULT, WSO2_QAP_JIRA WHERE WSO2_QAP_TEST_RESULT.WSO2_QAP_TEST_RESULT_ID = WSO2_QAP_JIRA_MAPPING_TESTRESULT.WSO2_QAP_TEST_RESULT_ID
-AND WSO2_QAP_JIRA_MAPPING_TESTRESULT.WSO2_QAP_JIRA_ID = WSO2_QAP_JIRA.WSO2_QAP_JIRA_ID
-AND WSO2_QAP_TEST_RESULT.WSO2_QAP_TEST_RESULT_ID=?</sql>
+      <sql>SELECT WSO2_QAP_JIRA.WSO2_QAP_JIRA_ID, WSO2_QAP_URL, WSO2_QAP_DESCRIPTION FROM WSO2_QAP_TEST_RESULT, WSO2_QAP_JIRA_MAPPING_TESTRESULT, WSO2_QAP_JIRA WHERE WSO2_QAP_TEST_RESULT.WSO2_QAP_TEST_RESULT_ID = WSO2_QAP_JIRA_MAPPING_TESTRESULT.WSO2_QAP_TEST_RESULT_IDAND WSO2_QAP_JIRA_MAPPING_TESTRESULT.WSO2_QAP_JIRA_ID = WSO2_QAP_JIRA.WSO2_QAP_JIRA_IDAND WSO2_QAP_TEST_RESULT.WSO2_QAP_TEST_RESULT_ID=?</sql>
       <param name="WSO2_QAP_TEST_RESULT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <result element="WSO2_QAP_TEST_RESULTCollection" rowName="WSO2_QAP_TEST_RESULT">
          <element column="WSO2_QAP_JIRA_ID" name="WSO2_QAP_JIRA_ID" xsdType="xs:string"/>
@@ -133,7 +129,6 @@ AND WSO2_QAP_TEST_RESULT.WSO2_QAP_TEST_RESULT_ID=?</sql>
    <operation name="select_all_WSO2_QAP_TEST_RESULT_operation">
       <call-query href="select_all_WSO2_QAP_TEST_RESULT_query"/>
    </operation>
-
    <resource method="GET" path="view/testreults_with_testcaseid">
       <call-query href="select_with_testcaseid_WSO2_QAP_TEST_RESULT_query">
          <with-param name="WSO2_QAP_TEST_CASE_ID" query-param="WSO2_QAP_TEST_CASE_ID"/>
