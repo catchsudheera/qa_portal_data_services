@@ -34,6 +34,20 @@
       <param name="WSO2_QAP_TEST_SCENARIO_NAME" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
       <param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
    </query>
+
+<query id="select_all_WSO2_QAP_TEST_CASE_query" useConfig="default">
+      <sql>SELECT DISTINCT WSO2_QAP_TEST_CASE_ID,WSO2_QAP_TEST_CASE_NAME, WSO2_QAP_DESCRIPTION, WSO2_QAP_AUTOMATION_STATUS
+	FROM WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPING
+	NATURAL JOIN WSO2_QAP_TEST_CASE WHERE WSO2_QAP_TEST_SCENARIO_ID =?</sql>
+	<param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_TEST_CASECollection" rowName="WSO2_QAP_TEST_CASE">
+	<element column="WSO2_QAP_TEST_CASE_ID" name="WSO2_QAP_TEST_CASE_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_TEST_CASE_NAME" name="WSO2_QAP_TEST_CASE_NAME" xsdType="xs:string"/>
+         <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
+         <element column="WSO2_QAP_AUTOMATION_STATUS" name="WSO2_QAP_AUTOMATION_STATUS" xsdType="xs:string"/>
+      </result>
+   </query>
+
    
    <resource method="GET" path="view/testscenario">
       <call-query href="select_all_WSO2_QAP_TEST_SCENARIO_query">                                     
@@ -54,6 +68,12 @@
     <resource method="GET" path="view/testscenario_with_id/{WSO2_QAP_TEST_SCENARIO_ID}">
       <call-query href="select_with_key_WSO2_QAP_TEST_SCENARIO_query"> 
       <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>                                    
+      </call-query>
+   </resource>
+
+<resource method="GET" path="get/testscenario_join_testcase_by_testscenario_id/{WSO2_QAP_TEST_SCENARIO_ID}">
+      <call-query href="select_all_WSO2_QAP_TEST_CASE_query">  
+         <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
       </call-query>
    </resource>
 </data>

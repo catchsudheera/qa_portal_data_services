@@ -11,15 +11,20 @@
    </query>
    <query id="select_WSO2_QAP_TEST_SUITS_BY_TEST_PLAN_query" useConfig="default">
       <sql>SELECT WSO2_QAP_TEST_SUIT_ID, WSO2_QAP_FEATURE_ID, WSO2_QAP_TEST_SUIT_NAME FROM WSO2_QAP_TESTPLAN_MAPPING_TESTSUIT NATURAL JOIN WSO2_QAP_TEST_SUIT WHERE WSO2_QAP_TEST_PLAN_ID=?</sql>
-     <param name="WSO2_QAP_TEST_PLAN_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_TEST_PLAN_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <result element="WSO2_QAP_TEST_PLAN_TEST_SUIT_MAPPINGCollection" rowName="WSO2_QAP_TEST_PLAN_TEST_SUIT_MAPPING">
          <element column="WSO2_QAP_TEST_SUIT_ID" name="WSO2_QAP_TEST_SUIT_ID" xsdType="xs:integer"/>
-	 <element column="WSO2_QAP_FEATURE_ID" name="WSO2_QAP_FEATURE_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_FEATURE_ID" name="WSO2_QAP_FEATURE_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_TEST_SUIT_NAME" name="WSO2_QAP_TEST_SUIT_NAME" xsdType="xs:string"/>
       </result>
    </query>
    <query id="insert_WSO2_QAP_TEST_PLAN_TEST_SUIT_MAPPING_query" useConfig="default">
-      <sql>INSERT INTO WSO2_QAP_TEST_PLAN_TEST_SUIT_MAPPING(WSO2_QAP_TEST_PLAN_ID,WSO2_QAP_TEST_SUIT_ID) VALUES(?,?)</sql>
+      <sql>INSERT INTO WSO2_QAP_TESTPLAN_MAPPING_TESTSUIT(WSO2_QAP_TEST_PLAN_ID,WSO2_QAP_TEST_SUIT_ID) VALUES(?,?)</sql>
+      <param name="WSO2_QAP_TEST_PLAN_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="delete_WSO2_QAP_TEST_SUIT_query" useConfig="default">
+      <sql>DELETE FROM WSO2_QAP_TESTPLAN_MAPPING_TESTSUIT WHERE WSO2_QAP_TEST_PLAN_ID=? AND WSO2_QAP_TEST_SUIT_ID=?</sql>
       <param name="WSO2_QAP_TEST_PLAN_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
    </query>
@@ -32,9 +37,21 @@
    <operation name="select_all_WSO2_QAP_TEST_PLAN_TEST_SUIT_MAPPING_operation">
       <call-query href="select_all_WSO2_QAP_TEST_PLAN_TEST_SUIT_MAPPING_query"/>
    </operation>
-    <resource method="GET" path="get/testsuits_by_testplanid/{WSO2_QAP_TEST_PLAN_ID}">
-      <call-query href="select_WSO2_QAP_TEST_SUITS_BY_TEST_PLAN_query">  
+   <resource method="GET" path="get/testsuits_by_testplanid/{WSO2_QAP_TEST_PLAN_ID}">
+      <call-query href="select_WSO2_QAP_TEST_SUITS_BY_TEST_PLAN_query">
          <with-param name="WSO2_QAP_TEST_PLAN_ID" query-param="WSO2_QAP_TEST_PLAN_ID"/>
+      </call-query>
+   </resource>
+   <resource method="POST" path="add/data_to_plan_suit_mapping">
+      <call-query href="insert_WSO2_QAP_TEST_PLAN_TEST_SUIT_MAPPING_query">
+         <with-param name="WSO2_QAP_TEST_PLAN_ID" query-param="WSO2_QAP_TEST_PLAN_ID"/>
+         <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
+      </call-query>
+   </resource>
+   <resource method="DELETE" path="delete/testsuit_mapping_testplan/{WSO2_QAP_TEST_PLAN_ID}/{WSO2_QAP_TEST_SUIT_ID}">
+      <call-query href="delete_WSO2_QAP_TEST_SUIT_query">
+         <with-param name="WSO2_QAP_TEST_PLAN_ID" query-param="WSO2_QAP_TEST_PLAN_ID"/>
+         <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
       </call-query>
    </resource>
 </data>

@@ -18,6 +18,16 @@
          <element column="WSO2_QAP_OWNER" name="WSO2_QAP_OWNER" xsdType="xs:string"/>
       </result>
    </query>
+
+   <query id="select_TESTSCENARIO_FOR_WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_TEST_SCENARIO_ID FROM WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING WHERE WSO2_QAP_TEST_SUIT_ID=?</sql>
+      <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPINGCollection" rowName="WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING">
+         <element column="WSO2_QAP_TEST_SCENARIO_ID" name="WSO2_QAP_TEST_SCENARIO_ID" xsdType="xs:integer"/>
+                 
+      </result>
+   </query>
+
    <operation name="select_all_WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING_operation">
       <call-query href="select_all_WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING_query"/>
    </operation>
@@ -29,4 +39,10 @@
          <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
       </call-query>
    </operation>
+
+    <resource method="GET" path="get/testscenarios_by_testsuit_ids/{WSO2_QAP_TEST_SUIT_ID}">
+      <call-query href="select_TESTSCENARIO_FOR_WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING_query">
+         <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
+      </call-query>
+   </resource>
 </data>

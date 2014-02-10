@@ -21,7 +21,27 @@
          <element column="WSO2_QAP_TEST_SCENARIO_ID" name="WSO2_QAP_TEST_SCENARIO_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_TEST_CASE_ID" name="WSO2_QAP_TEST_CASE_ID" xsdType="xs:integer"/>
       </result>
-</query>
+   </query>
+
+   <query id="select_with_testscenarioid_WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPING_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_TEST_CASE_ID FROM WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPING WHERE WSO2_QAP_TEST_SCENARIO_ID=?</sql>
+      <param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPINGCollection" rowName="WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPING">
+           <element column="WSO2_QAP_TEST_CASE_ID" name="WSO2_QAP_TEST_CASE_ID" xsdType="xs:integer"/>
+      </result>
+   </query>
+
+   <query id="select_available_testcases_for_testscenario_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_TEST_CASE_ID,WSO2_QAP_TEST_CASE_NAME,WSO2_QAP_DESCRIPTION, WSO2_QAP_AUTOMATION_STATUS FROM WSO2_QAP_TEST_CASE WHERE WSO2_QAP_TEST_CASE_ID NOT IN (SELECT WSO2_QAP_TEST_CASE_ID FROM WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPING WHERE WSO2_QAP_TEST_SCENARIO_ID=?)
+</sql>
+      <param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPINGCollection" rowName="WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPING">
+              <element column="WSO2_QAP_TEST_CASE_ID" name="WSO2_QAP_TEST_CASE_ID" xsdType="xs:integer"/>
+	      <element column="WSO2_QAP_TEST_CASE_NAME" name="WSO2_QAP_TEST_CASE_NAME" xsdType="xs:string"/>
+              <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
+	      <element column="WSO2_QAP_AUTOMATION_STATUS" name="WSO2_QAP_AUTOMATION_STATUS" xsdType="xs:string"/>
+      </result>
+   </query>
 
    <operation name="select_all_WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPING_operation">
       <call-query href="select_all_WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPING_query"/>
@@ -38,4 +58,26 @@
          <with-param name="WSO2_QAP_TEST_CASE_ID" query-param="WSO2_QAP_TEST_CASE_ID"/>
       </call-query>
    </resource>
+
+   <resource method="GET" path="view/testcase_with_testscenarioid/{WSO2_QAP_TEST_SCENARIO_ID}">
+      <call-query href="select_with_testscenarioid_WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPING_query">
+         <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
+      </call-query>
+   </resource>
+
+   <resource method="GET" path="view/testcases_for_testscenario/{WSO2_QAP_TEST_SCENARIO_ID}">
+      <call-query href="select_available_testcases_for_testscenario_query">
+         <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
+      </call-query>
+   </resource>
+
+   <resource method="POST" path="add/testcases_for_testscenario">
+      <call-query href="insert_WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPING_query">
+         <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
+         <with-param name="WSO2_QAP_TEST_CASE_ID" query-param="WSO2_QAP_TEST_CASE_ID"/>
+      </call-query>
+   </resource>
+
+
+   
 </data>

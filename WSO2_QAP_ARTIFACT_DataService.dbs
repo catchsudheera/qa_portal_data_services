@@ -3,22 +3,28 @@
       <property name="carbon_datasource_name">wso2_mysql_qa_portal</property>
    </config>
    <query id="select_with_key_WSO2_QAP_ARTIFACT_query" useConfig="default">
-      <sql>SELECT WSO2_QAP_ARTIFACT_ID, WSO2_QAP_ARTIFACT_NAME, WSO2_QAP_DESCRIPTION, WSO2_QAP_LOCATION FROM WSO2_QAP_ARTIFACT WHERE WSO2_QAP_ARTIFACT_ID=?</sql>
+      <sql>SELECT WSO2_QAP_ARTIFACT_ID, WSO2_QAP_ARTIFACT_NAME, WSO2_QAP_ARTIFACT_DESCRIPTION, WSO2_QAP_LOCATION FROM WSO2_QAP_ARTIFACT WHERE WSO2_QAP_ARTIFACT_ID=?</sql>
       <param name="WSO2_QAP_ARTIFACT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <result element="WSO2_QAP_ARTIFACTCollection" rowName="WSO2_QAP_ARTIFACT">
          <element column="WSO2_QAP_ARTIFACT_ID" name="WSO2_QAP_ARTIFACT_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_ARTIFACT_NAME" name="WSO2_QAP_ARTIFACT_NAME" xsdType="xs:string"/>
-         <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
+         <element column="WSO2_QAP_ARTIFACT_DESCRIPTION" name="WSO2_QAP_ARTIFACT_DESCRIPTION" xsdType="xs:string"/>
          <element column="WSO2_QAP_LOCATION" name="WSO2_QAP_LOCATION" xsdType="xs:string"/>
       </result>
    </query>
    <query id="select_all_WSO2_QAP_ARTIFACT_query" useConfig="default">
-      <sql>SELECT WSO2_QAP_ARTIFACT_ID, WSO2_QAP_ARTIFACT_NAME, WSO2_QAP_DESCRIPTION, WSO2_QAP_LOCATION FROM WSO2_QAP_ARTIFACT</sql>
+      <sql>SELECT WSO2_QAP_ARTIFACT_ID, WSO2_QAP_ARTIFACT_NAME, WSO2_QAP_ARTIFACT_DESCRIPTION, WSO2_QAP_LOCATION FROM WSO2_QAP_ARTIFACT</sql>
       <result element="WSO2_QAP_ARTIFACTCollection" rowName="WSO2_QAP_ARTIFACT">
          <element column="WSO2_QAP_ARTIFACT_ID" name="WSO2_QAP_ARTIFACT_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_ARTIFACT_NAME" name="WSO2_QAP_ARTIFACT_NAME" xsdType="xs:string"/>
-         <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
+         <element column="WSO2_QAP_ARTIFACT_DESCRIPTION" name="WSO2_QAP_ARTIFACT_DESCRIPTION" xsdType="xs:string"/>
          <element column="WSO2_QAP_LOCATION" name="WSO2_QAP_LOCATION" xsdType="xs:string"/>
+      </result>
+   </query>
+   <query id="get_last_inserted_id" useConfig="default">
+      <sql>SELECT LAST_INSERT_ID() AS LAST_INSERTED_ID</sql>
+      <result element="WSO2_QAP_ARTIFACTCollection" rowName="WSO2_QAP_ARTIFACT">
+         <element column="LAST_INSERTED_ID" name="LAST_INSERTED_ID" xsdType="xs:integer"/>
       </result>
    </query>
    <query id="delete_WSO2_QAP_ARTIFACT_query" useConfig="default">
@@ -26,15 +32,15 @@
       <param name="WSO2_QAP_ARTIFACT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
    </query>
    <query id="insert_WSO2_QAP_ARTIFACT_query" useConfig="default">
-      <sql>INSERT INTO WSO2_QAP_ARTIFACT(WSO2_QAP_ARTIFACT_NAME,WSO2_QAP_DESCRIPTION,WSO2_QAP_LOCATION) VALUES(?,?,?)</sql>
+      <sql>INSERT INTO WSO2_QAP_ARTIFACT(WSO2_QAP_ARTIFACT_NAME,WSO2_QAP_ARTIFACT_DESCRIPTION,WSO2_QAP_LOCATION) VALUES(?,?,?)</sql>
       <param name="WSO2_QAP_ARTIFACT_NAME" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
-      <param name="WSO2_QAP_DESCRIPTION" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="WSO2_QAP_ARTIFACT_DESCRIPTION" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
       <param name="WSO2_QAP_LOCATION" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
    </query>
    <query id="update_WSO2_QAP_ARTIFACT_query" useConfig="default">
-      <sql>UPDATE WSO2_QAP_ARTIFACT SET WSO2_QAP_ARTIFACT_NAME=?,WSO2_QAP_DESCRIPTION=?,WSO2_QAP_LOCATION=? WHERE WSO2_QAP_ARTIFACT_ID=?</sql>
+      <sql>UPDATE WSO2_QAP_ARTIFACT SET WSO2_QAP_ARTIFACT_NAME=?,WSO2_QAP_ARTIFACT_DESCRIPTION=?,WSO2_QAP_LOCATION=? WHERE WSO2_QAP_ARTIFACT_ID=?</sql>
       <param name="WSO2_QAP_ARTIFACT_NAME" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
-      <param name="WSO2_QAP_DESCRIPTION" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="WSO2_QAP_ARTIFACT_DESCRIPTION" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
       <param name="WSO2_QAP_LOCATION" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
       <param name="WSO2_QAP_ARTIFACT_ID" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
    </query>
@@ -42,7 +48,7 @@
       <call-query href="insert_WSO2_QAP_ARTIFACT_query">
          <with-param name="WSO2_QAP_LOCATION" query-param="WSO2_QAP_LOCATION"/>
          <with-param name="WSO2_QAP_ARTIFACT_NAME" query-param="WSO2_QAP_ARTIFACT_NAME"/>
-         <with-param name="WSO2_QAP_DESCRIPTION" query-param="WSO2_QAP_DESCRIPTION"/>
+         <with-param name="WSO2_QAP_ARTIFACT_DESCRIPTION" query-param="WSO2_QAP_ARTIFACT_DESCRIPTION"/>
       </call-query>
    </operation>
    <operation name="select_with_key_WSO2_QAP_ARTIFACT_operation">
@@ -63,7 +69,7 @@
          <with-param name="WSO2_QAP_ARTIFACT_ID" query-param="WSO2_QAP_ARTIFACT_ID"/>
          <with-param name="WSO2_QAP_LOCATION" query-param="WSO2_QAP_LOCATION"/>
          <with-param name="WSO2_QAP_ARTIFACT_NAME" query-param="WSO2_QAP_ARTIFACT_NAME"/>
-         <with-param name="WSO2_QAP_DESCRIPTION" query-param="WSO2_QAP_DESCRIPTION"/>
+         <with-param name="WSO2_QAP_ARTIFACT_DESCRIPTION" query-param="WSO2_QAP_ARTIFACT_DESCRIPTION"/>
       </call-query>
    </operation>
    <resource method="GET" path="view/artifacts">
@@ -79,12 +85,17 @@
       <call-query href="insert_WSO2_QAP_ARTIFACT_query">
          <with-param name="WSO2_QAP_LOCATION" query-param="WSO2_QAP_LOCATION"/>
          <with-param name="WSO2_QAP_ARTIFACT_NAME" query-param="WSO2_QAP_ARTIFACT_NAME"/>
-         <with-param name="WSO2_QAP_DESCRIPTION" query-param="WSO2_QAP_DESCRIPTION"/>
+         <with-param name="WSO2_QAP_ARTIFACT_DESCRIPTION" query-param="WSO2_QAP_ARTIFACT_DESCRIPTION"/>
       </call-query>
    </resource>
-   <resource method="GET" path="view/artifacts_with_id">
+   <resource method="GET" path="view/artifacts_with_id/{WSO2_QAP_ARTIFACT_ID}">
       <call-query href="select_with_key_WSO2_QAP_ARTIFACT_query">
          <with-param name="WSO2_QAP_ARTIFACT_ID" query-param="WSO2_QAP_ARTIFACT_ID"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="view/last_id">
+      <call-query href="get_last_inserted_id">
+         
       </call-query>
    </resource>
 </data>

@@ -55,7 +55,11 @@
       </call-query>
    </operation>
    <resource method="GET" path="view/products">
-      <call-query href="select_all_WSO2_QAP_PRODUCT_query">                                     
+      <call-query href="select_all_WSO2_QAP_PRODUCT_query">                                           </call-query>
+   </resource>
+   <resource method="GET" path="get/product_by_id/{WSO2_QAP_PRODUCT_ID}">
+      <call-query href="select_with_key_WSO2_QAP_PRODUCT_query">
+         <with-param name="WSO2_QAP_PRODUCT_ID" query-param="WSO2_QAP_PRODUCT_ID"/>
       </call-query>
    </resource>
    <resource method="DELETE" path="delete/products/{WSO2_QAP_PRODUCT_ID}">

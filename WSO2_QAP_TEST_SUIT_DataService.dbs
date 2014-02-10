@@ -20,6 +20,14 @@
          <element column="WSO2_QAP_TEST_SUIT_NAME" name="WSO2_QAP_TEST_SUIT_NAME" xsdType="xs:string"/>
       </result>
    </query>
+   <query id="select_TESTSUIT_NOT_IN_PLAN_MAPPING_SUIT_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_TEST_SUIT_ID, WSO2_QAP_TEST_SUIT_NAME FROM WSO2_QAP_TEST_SUIT WHERE WSO2_QAP_TEST_SUIT_ID NOT IN ( SELECT WSO2_QAP_TEST_SUIT_ID FROM WSO2_QAP_TESTPLAN_MAPPING_TESTSUIT WHERE WSO2_QAP_TEST_PLAN_ID=?)</sql>
+      <param name="WSO2_QAP_TEST_PLAN_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="SUIT_DATA_NOT_IN_PLAN_MAPPINGCollection" rowName="SUIT_DATA_NOT_IN_PLAN_MAPPING">
+         <element column="WSO2_QAP_TEST_SUIT_ID" name="WSO2_QAP_TEST_SUIT_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_TEST_SUIT_NAME" name="WSO2_QAP_TEST_SUIT_NAME" xsdType="xs:string"/>
+      </result>
+   </query>
    <query id="select_all_DATA_TESTSUIT_join_TESTPLAN_query" useConfig="default">
       <sql>SELECT DISTINCT WSO2_QAP_TEST_SUIT_ID, WSO2_QAP_TEST_PLAN_ID, WSO2_QAP_PRODUCT_VERSION_ID, WSO2_QAP_PLANNING_STATUS, WSO2_QAP_FEATURE_ID, WSO2_QAP_TEST_SUIT_NAME, WSO2_QAP_PRODUCT_VERSION,
       WSO2_QAP_PRODUCT_ID, WSO2_QAP_PRODUCT_NAME FROM WSO2_QAP_TESTPLAN_MAPPING_TESTSUIT NATURAL JOIN WSO2_QAP_TEST_PLAN NATURAL JOIN WSO2_QAP_TEST_SUIT NATURAL JOIN WSO2_QAP_PRODUCT_VERSION NATURAL JOIN WSO2_QAP_PRODUCT WHERE WSO2_QAP_TEST_SUIT_ID=?</sql>
@@ -81,6 +89,17 @@
          <element column="WSO2_QAP_TEST_SUIT_NAME" name="WSO2_QAP_TEST_SUIT_NAME" xsdType="xs:string"/>
       </result>
    </query>
+
+<query id="select_all_TESTSUIT_join_TESTSCENARIO_query" useConfig="default">
+      <sql>SELECT DISTINCT WSO2_QAP_TEST_SUIT_ID,WSO2_QAP_TEST_SUIT_NAME FROM WSO2_QAP_TEST_SUIT NATURAL JOIN WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING
+WHERE WSO2_QAP_TEST_SCENARIO_ID =?</sql>
+      <param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_DATA_TESTSUIT_join_TESTSCENARIOCollection" rowName="WSO2_QAP_DATA_TESTSUIT_join_TESTSCENARIO">
+         <element column="WSO2_QAP_TEST_SUIT_NAME" name="WSO2_QAP_TEST_SUIT_NAME" xsdType="xs:string"/>
+	<element column="WSO2_QAP_TEST_SUIT_ID" name="WSO2_QAP_TEST_SUIT_ID" xsdType="xs:integer"/>
+      </result>
+   </query>
+
    <operation name="select_with_key_WSO2_QAP_TEST_SUIT_operation">
       <call-query href="select_with_key_WSO2_QAP_TEST_SUIT_query">
          <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
@@ -136,6 +155,23 @@
    <resource method="DELETE" path="delete/testsuit/{WSO2_QAP_TEST_SUIT_ID}">
       <call-query href="delete_WSO2_QAP_TEST_SUIT_query">
          <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
+      </call-query>
+   </resource>
+
+   <resource method="GET" path="view/testsuit_by_id/{WSO2_QAP_TEST_SUIT_ID}">
+      <call-query href="select_with_key_WSO2_QAP_TEST_SUIT_query">  
+         <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
+      </call-query>
+   </resource>
+
+<resource method="GET" path="view/testsuit_by_scenario_id/{WSO2_QAP_TEST_SCENARIO_ID}">
+      <call-query href="select_all_TESTSUIT_join_TESTSCENARIO_query">  
+         <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="get/testsuits_not_in_testplan_mappin_by_testsuit_id/{WSO2_QAP_TEST_PLAN_ID}">
+      <call-query href="select_TESTSUIT_NOT_IN_PLAN_MAPPING_SUIT_query">  
+         <with-param name="WSO2_QAP_TEST_PLAN_ID" query-param="WSO2_QAP_TEST_PLAN_ID"/>
       </call-query>
    </resource>
 </data>

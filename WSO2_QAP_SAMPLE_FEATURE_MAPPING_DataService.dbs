@@ -58,8 +58,9 @@
    </resource>
    <resource method="POST" path="add/featureswithsamples">
      <call-query href="insert_WSO2_QAP_SAMPLE_FEATURE_MAPPING_query">
-         <with-param name="WSO2_QAP_SAMPLE_ID" query-param="WSO2_QAP_SAMPLE_ID"/>
          <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
+         <with-param name="WSO2_QAP_SAMPLE_ID" query-param="WSO2_QAP_SAMPLE_ID"/>
+         
       </call-query>
    </resource>
 </data>

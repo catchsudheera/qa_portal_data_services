@@ -14,6 +14,13 @@
          <element column="WSO2_QAP_TEST_PLAN_ID" name="WSO2_QAP_TEST_PLAN_ID" xsdType="xs:integer"/>
       </result>
    </query>
+   <query id="select_TESTSUIT_FOR_TESTPLAN_WSO2_QAP_TESTPLAN_MAPPING_TESTSUIT_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_TEST_SUIT_ID FROM WSO2_QAP_TESTPLAN_MAPPING_TESTSUIT WHERE WSO2_QAP_TEST_PLAN_ID=?</sql>
+      <param name="WSO2_QAP_TEST_PLAN_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_TESTPLAN_MAPPING_TESTSUITCollection" rowName="WSO2_QAP_TESTPLAN_MAPPING_TESTSUIT">
+         <element column="WSO2_QAP_TEST_SUIT_ID" name="WSO2_QAP_TEST_SUIT_ID" xsdType="xs:integer"/>
+      </result>
+   </query>
    <operation name="select_all_WSO2_QAP_TESTPLAN_MAPPING_TESTSUIT_operation">
       <call-query href="select_all_WSO2_QAP_TESTPLAN_MAPPING_TESTSUIT_query"/>
    </operation>
@@ -23,4 +30,9 @@
          <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
       </call-query>
    </operation>
+   <resource method="GET" path="get/testsuit_ids/{WSO2_QAP_TEST_PLAN_ID}">
+      <call-query href="select_TESTSUIT_FOR_TESTPLAN_WSO2_QAP_TESTPLAN_MAPPING_TESTSUIT_query">
+         <with-param name="WSO2_QAP_TEST_PLAN_ID" query-param="WSO2_QAP_TEST_PLAN_ID"/>
+      </call-query>
+   </resource>
 </data>
