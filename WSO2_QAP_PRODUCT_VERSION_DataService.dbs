@@ -21,7 +21,7 @@
       <param name="WSO2_QAP_PRODUCT_VERSION_ID" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
    </query>
    <query id="select_with_version_key_VERSION_JOIN_FEATURE" useConfig="default">
-      <sql>SELECT WSO2_QAP_PRODUCT_VERSION_ID, WSO2_QAP_FEATURE_ID, WSO2_QAP_DESCRIPTION, WSO2_QAP_REDMINE_URL, WSO2_QAP_PRODUCT_ID, WSO2_QAP_PRODUCT_VERSION FROM WSO2_QAP_FEATURE NATURAL JOIN WSO2_QAP_PRODUCT_VERSION_FEATURE_MAPPING NATURAL JOIN WSO2_QAP_PRODUCT_VERSION WHERE WSO2_QAP_PRODUCT_VERSION_ID=?</sql>
+      <sql>SELECT WSO2_QAP_PRODUCT_VERSION_ID, WSO2_QAP_FEATURE_ID, WSO2_QAP_DESCRIPTION, WSO2_QAP_REDMINE_URL, WSO2_QAP_PRODUCT_ID, WSO2_QAP_PRODUCT_VERSION, WSO2_QAP_SUBJECT FROM WSO2_QAP_FEATURE NATURAL JOIN WSO2_QAP_PRODUCT_VERSION_FEATURE_MAPPING NATURAL JOIN WSO2_QAP_PRODUCT_VERSION WHERE WSO2_QAP_PRODUCT_VERSION_ID=?</sql>
       <param name="WSO2_QAP_PRODUCT_VERSION_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <result element="WSO2_QAP_PRODUCT_VERSIONCollection" rowName="WSO2_QAP_PRODUCT_VERSION">
          <element column="WSO2_QAP_PRODUCT_VERSION_ID" name="WSO2_QAP_PRODUCT_VERSION_ID" xsdType="xs:integer"/>
@@ -30,6 +30,7 @@
          <element column="WSO2_QAP_REDMINE_URL" name="WSO2_QAP_REDMINE_URL" xsdType="xs:string"/>
          <element column="WSO2_QAP_PRODUCT_ID" name="WSO2_QAP_PRODUCT_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_PRODUCT_VERSION" name="WSO2_QAP_PRODUCT_VERSION" xsdType="xs:string"/>
+         <element column="WSO2_QAP_SUBJECT" name="WSO2_QAP_SUBJECT" xsdType="xs:string"/>
       </result>
    </query>
    <query id="select_with_version_key_VERSION_JOIN_BUILD" useConfig="default">

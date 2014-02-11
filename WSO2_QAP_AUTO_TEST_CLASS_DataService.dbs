@@ -40,6 +40,12 @@
          <element column="WSO2_QAP_AUTO_TEST_CLASS_NAME" name="WSO2_QAP_AUTO_TEST_CLASS_NAME" xsdType="xs:string"/>
       </result>
    </query>
+
+<query id="delete_WSO2_QAP_AUTO_TEST_CLASS_query" useConfig="default">
+      <sql>DELETE FROM WSO2_QAP_AUTO_TEST_CLASS WHERE WSO2_QAP_AUTO_TEST_CLASS_ID=?</sql>
+      <param name="WSO2_QAP_AUTO_TEST_CLASS_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+
    <operation name="insert_WSO2_QAP_AUTO_TEST_CLASS_operation">
       <call-query href="insert_WSO2_QAP_AUTO_TEST_CLASS_query">
          <with-param name="WSO2_QAP_AUTO_TEST_CLASS_LOCATION" query-param="WSO2_QAP_AUTO_TEST_CLASS_LOCATION"/>
@@ -83,6 +89,12 @@
    </resource>
    <resource method="GET" path="view/last_id">
       <call-query href="get_last_inserted_id">         
+      </call-query>
+   </resource>
+
+	<resource method="DELETE" path="delete/autotestclass/{WSO2_QAP_AUTO_TEST_CLASS_ID}">
+      <call-query href="delete_WSO2_QAP_AUTO_TEST_CLASS_query">
+         <with-param name="WSO2_QAP_AUTO_TEST_CLASS_ID" query-param="WSO2_QAP_AUTO_TEST_CLASS_ID"/>
       </call-query>
    </resource>
 </data>

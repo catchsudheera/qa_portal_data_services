@@ -73,8 +73,8 @@
    </query>
    <query id="insert_WSO2_QAP_TEST_SUIT_query" useConfig="default">
       <sql>INSERT INTO WSO2_QAP_TEST_SUIT(WSO2_QAP_FEATURE_ID,WSO2_QAP_TEST_SUIT_NAME) VALUES(?,?)</sql>
-      <param name="WSO2_QAP_FEATURE_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
-      <param name="WSO2_QAP_TEST_SUIT_NAME" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="WSO2_QAP_FEATURE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_TEST_SUIT_NAME" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
    </query>
    <query id="delete_WSO2_QAP_TEST_SUIT_query" useConfig="default">
       <sql>DELETE FROM WSO2_QAP_TEST_SUIT WHERE WSO2_QAP_TEST_SUIT_ID=?</sql>

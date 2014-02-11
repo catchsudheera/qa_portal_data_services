@@ -3,35 +3,28 @@
       <property name="carbon_datasource_name">wso2_mysql_qa_portal</property>
    </config>
    <query id="insert_WSO2_QAP_TEST_RESULT_query" useConfig="default">
-      <sql>INSERT INTO WSO2_QAP_TEST_RESULT(WSO2_QAP_TEST_RESULT_ID,WSO2_QAP_TEST_PLAN_ID,WSO2_QAP_TEST_CASE_ID,WSO2_QAP_TEST_STATUS,WSO2_QAP_AUTOMATION_TEST_RESULT,WSO2_QAP_JIRA,WSO2_QAP_TESTED_BY) VALUES(?,?,?,?,?,?,?)</sql>
-      <param name="WSO2_QAP_TEST_RESULT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
-      <param name="WSO2_QAP_TEST_PLAN_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
-      <param name="WSO2_QAP_TEST_CASE_ID" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
-      <param name="WSO2_QAP_TEST_STATUS" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
-      <param name="WSO2_QAP_AUTOMATION_TEST_RESULT" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
-      <param name="WSO2_QAP_JIRA" ordinal="6" paramType="SCALAR" sqlType="STRING" type="IN"/>
-      <param name="WSO2_QAP_TESTED_BY" ordinal="7" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <sql>INSERT INTO WSO2_QAP_TEST_RESULT(WSO2_QAP_TEST_CASE_ID,WSO2_QAP_TEST_STATUS,WSO2_QAP_AUTOMATION_TEST_RESULT,WSO2_QAP_TESTED_BY) VALUES(?,?,?,?)</sql>
+      <param name="WSO2_QAP_TEST_CASE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_TEST_STATUS" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="WSO2_QAP_AUTOMATION_TEST_RESULT" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="WSO2_QAP_TESTED_BY" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
    </query>
    <query id="update_WSO2_QAP_TEST_RESULT_query" useConfig="default">
-      <sql>UPDATE WSO2_QAP_TEST_RESULT SET WSO2_QAP_TEST_RESULT_ID=?,WSO2_QAP_TEST_CASE_ID=?,WSO2_QAP_TEST_STATUS=?,WSO2_QAP_AUTOMATION_TEST_RESULT=?,WSO2_QAP_JIRA=?,WSO2_QAP_TESTED_BY=? WHERE WSO2_QAP_TEST_PLAN_ID=?</sql>
+      <sql>UPDATE WSO2_QAP_TEST_RESULT SET WSO2_QAP_TEST_CASE_ID=?,WSO2_QAP_TEST_STATUS=?,WSO2_QAP_AUTOMATION_TEST_RESULT=?,WSO2_QAP_TESTED_BY=? WHERE WSO2_QAP_TEST_RESULT_ID=?</sql>
       <param name="WSO2_QAP_TEST_RESULT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <param name="WSO2_QAP_TEST_CASE_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <param name="WSO2_QAP_TEST_STATUS" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
       <param name="WSO2_QAP_AUTOMATION_TEST_RESULT" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
-      <param name="WSO2_QAP_JIRA" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
       <param name="WSO2_QAP_TESTED_BY" ordinal="6" paramType="SCALAR" sqlType="STRING" type="IN"/>
-      <param name="WSO2_QAP_TEST_PLAN_ID" ordinal="7" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
-   </query>
+     </query>
    <query id="select_with_key_WSO2_QAP_TEST_RESULT_query" useConfig="default">
-      <sql>SELECT WSO2_QAP_TEST_RESULT_ID, WSO2_QAP_TEST_PLAN_ID, WSO2_QAP_TEST_CASE_ID, WSO2_QAP_TEST_STATUS, WSO2_QAP_AUTOMATION_TEST_RESULT, WSO2_QAP_JIRA, WSO2_QAP_TESTED_BY FROM WSO2_QAP_TEST_RESULT WHERE WSO2_QAP_TEST_PLAN_ID=?</sql>
-      <param name="WSO2_QAP_TEST_PLAN_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <sql>SELECT WSO2_QAP_TEST_CASE_ID, WSO2_QAP_TEST_STATUS, WSO2_QAP_AUTOMATION_TEST_RESULT, WSO2_QAP_TESTED_BY FROM WSO2_QAP_TEST_RESULT WHERE WSO2_QAP_TEST_RESULT_ID=?</sql>
+      <param name="WSO2_QAP_TEST_RESULT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <result element="WSO2_QAP_TEST_RESULTCollection" rowName="WSO2_QAP_TEST_RESULT">
          <element column="WSO2_QAP_TEST_RESULT_ID" name="WSO2_QAP_TEST_RESULT_ID" xsdType="xs:integer"/>
-         <element column="WSO2_QAP_TEST_PLAN_ID" name="WSO2_QAP_TEST_PLAN_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_TEST_CASE_ID" name="WSO2_QAP_TEST_CASE_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_TEST_STATUS" name="WSO2_QAP_TEST_STATUS" xsdType="xs:string"/>
          <element column="WSO2_QAP_AUTOMATION_TEST_RESULT" name="WSO2_QAP_AUTOMATION_TEST_RESULT" xsdType="xs:string"/>
-         <element column="WSO2_QAP_JIRA" name="WSO2_QAP_JIRA" xsdType="xs:string"/>
          <element column="WSO2_QAP_TESTED_BY" name="WSO2_QAP_TESTED_BY" xsdType="xs:string"/>
       </result>
    </query>
@@ -59,14 +52,12 @@
       </result>
    </query>
    <query id="select_all_WSO2_QAP_TEST_RESULT_query" useConfig="default">
-      <sql>SELECT WSO2_QAP_TEST_RESULT_ID, WSO2_QAP_TEST_PLAN_ID, WSO2_QAP_TEST_CASE_ID, WSO2_QAP_TEST_STATUS, WSO2_QAP_AUTOMATION_TEST_RESULT, WSO2_QAP_JIRA, WSO2_QAP_TESTED_BY FROM WSO2_QAP_TEST_RESULT</sql>
+      <sql>SELECT WSO2_QAP_TEST_RESULT_ID, WSO2_QAP_TEST_CASE_ID, WSO2_QAP_TEST_STATUS, WSO2_QAP_AUTOMATION_TEST_RESULT, WSO2_QAP_TESTED_BY FROM WSO2_QAP_TEST_RESULT</sql>
       <result element="WSO2_QAP_TEST_RESULTCollection" rowName="WSO2_QAP_TEST_RESULT">
          <element column="WSO2_QAP_TEST_RESULT_ID" name="WSO2_QAP_TEST_RESULT_ID" xsdType="xs:integer"/>
-         <element column="WSO2_QAP_TEST_PLAN_ID" name="WSO2_QAP_TEST_PLAN_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_TEST_CASE_ID" name="WSO2_QAP_TEST_CASE_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_TEST_STATUS" name="WSO2_QAP_TEST_STATUS" xsdType="xs:string"/>
          <element column="WSO2_QAP_AUTOMATION_TEST_RESULT" name="WSO2_QAP_AUTOMATION_TEST_RESULT" xsdType="xs:string"/>
-         <element column="WSO2_QAP_JIRA" name="WSO2_QAP_JIRA" xsdType="xs:string"/>
          <element column="WSO2_QAP_TESTED_BY" name="WSO2_QAP_TESTED_BY" xsdType="xs:string"/>
       </result>
    </query>
@@ -75,18 +66,17 @@
       <param name="WSO2_QAP_TEST_RESULT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
    </query>
    <query id="select_with_testcaseid_WSO2_QAP_TEST_RESULT_query" useConfig="default">
-      <sql>SELECT WSO2_QAP_TEST_RESULT_ID, WSO2_QAP_TEST_STATUS, WSO2_QAP_AUTOMATION_TEST_RESULT, WSO2_QAP_JIRA, WSO2_QAP_TESTED_BY FROM WSO2_QAP_TEST_RESULT WHERE WSO2_QAP_TEST_CASE_ID=?</sql>
+      <sql>SELECT WSO2_QAP_TEST_RESULT_ID, WSO2_QAP_TEST_STATUS, WSO2_QAP_AUTOMATION_TEST_RESULT, WSO2_QAP_TESTED_BY FROM WSO2_QAP_TEST_RESULT WHERE WSO2_QAP_TEST_CASE_ID=?</sql>
       <param name="WSO2_QAP_TEST_CASE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <result element="WSO2_QAP_TEST_RESULTCollection" rowName="WSO2_QAP_TEST_RESULT">
          <element column="WSO2_QAP_TEST_RESULT_ID" name="WSO2_QAP_TEST_RESULT_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_TEST_STATUS" name="WSO2_QAP_TEST_STATUS" xsdType="xs:string"/>
          <element column="WSO2_QAP_AUTOMATION_TEST_RESULT" name="WSO2_QAP_AUTOMATION_TEST_RESULT" xsdType="xs:string"/>
-         <element column="WSO2_QAP_JIRA" name="WSO2_QAP_JIRA" xsdType="xs:string"/>
          <element column="WSO2_QAP_TESTED_BY" name="WSO2_QAP_TESTED_BY" xsdType="xs:string"/>
       </result>
    </query>
    <query id="select_jira_with_id_WSO2_QAP_TEST_RESULT_query" useConfig="default">
-      <sql>SELECT WSO2_QAP_JIRA.WSO2_QAP_JIRA_ID, WSO2_QAP_URL, WSO2_QAP_DESCRIPTION FROM WSO2_QAP_TEST_RESULT, WSO2_QAP_JIRA_MAPPING_TESTRESULT, WSO2_QAP_JIRA WHERE WSO2_QAP_TEST_RESULT.WSO2_QAP_TEST_RESULT_ID = WSO2_QAP_JIRA_MAPPING_TESTRESULT.WSO2_QAP_TEST_RESULT_IDAND WSO2_QAP_JIRA_MAPPING_TESTRESULT.WSO2_QAP_JIRA_ID = WSO2_QAP_JIRA.WSO2_QAP_JIRA_IDAND WSO2_QAP_TEST_RESULT.WSO2_QAP_TEST_RESULT_ID=?</sql>
+      <sql>SELECT WSO2_QAP_JIRA.WSO2_QAP_JIRA_ID, WSO2_QAP_URL, WSO2_QAP_DESCRIPTION FROM WSO2_QAP_TEST_RESULT, WSO2_QAP_JIRA_MAPPING_TESTRESULT, WSO2_QAP_JIRA WHERE WSO2_QAP_TEST_RESULT.WSO2_QAP_TEST_RESULT_ID = WSO2_QAP_JIRA_MAPPING_TESTRESULT.WSO2_QAP_TEST_RESULT_IDAND WSO2_QAP_JIRA_MAPPING_TESTRESULT.WSO2_QAP_JIRA_ID = WSO2_QAP_JIRA.WSO2_QAP_JIRA_ID AND WSO2_QAP_TEST_RESULT.WSO2_QAP_TEST_RESULT_ID=?</sql>
       <param name="WSO2_QAP_TEST_RESULT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <result element="WSO2_QAP_TEST_RESULTCollection" rowName="WSO2_QAP_TEST_RESULT">
          <element column="WSO2_QAP_JIRA_ID" name="WSO2_QAP_JIRA_ID" xsdType="xs:string"/>
@@ -152,6 +142,14 @@
    <resource method="DELETE" path="delete/build_test_result/{WSO2_QAP_TEST_RESULT_ID}">
       <call-query href="delete_WSO2_QAP_TEST_RESULT_query">
          <with-param name="WSO2_QAP_TEST_RESULT_ID" query-param="WSO2_QAP_TEST_RESULT_ID"/>
+      </call-query>
+   </resource>
+   <resource method="POST" path="add/testresults">
+      <call-query href="insert_WSO2_QAP_TEST_RESULT_query">
+         <with-param name="WSO2_QAP_TEST_CASE_ID" query-param="WSO2_QAP_TEST_CASE_ID"/>
+         <with-param name="WSO2_QAP_TEST_STATUS" query-param="WSO2_QAP_TEST_STATUS"/>
+         <with-param name="WSO2_QAP_AUTOMATION_TEST_RESULT" query-param="WSO2_QAP_AUTOMATION_TEST_RESULT"/>
+         <with-param name="WSO2_QAP_TESTED_BY" query-param="WSO2_QAP_TESTED_BY"/>
       </call-query>
    </resource>
 </data>

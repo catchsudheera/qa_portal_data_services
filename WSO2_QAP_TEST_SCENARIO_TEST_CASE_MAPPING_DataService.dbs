@@ -43,6 +43,12 @@
       </result>
    </query>
 
+<query id="delete_WSO2_QAP_TESTCASE_FROM_SCENARIO_query" useConfig="default">
+      <sql>DELETE FROM WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPING WHERE WSO2_QAP_TEST_SCENARIO_ID=? AND WSO2_QAP_TEST_CASE_ID=?</sql>
+      <param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_TEST_CASE_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+
    <operation name="select_all_WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPING_operation">
       <call-query href="select_all_WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPING_query"/>
    </operation>
@@ -74,6 +80,13 @@
    <resource method="POST" path="add/testcases_for_testscenario">
       <call-query href="insert_WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPING_query">
          <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
+         <with-param name="WSO2_QAP_TEST_CASE_ID" query-param="WSO2_QAP_TEST_CASE_ID"/>
+      </call-query>
+   </resource>
+
+<resource method="DELETE" path="delete/testcase_from_scenario/{WSO2_QAP_TEST_SCENARIO_ID}/{WSO2_QAP_TEST_CASE_ID}">
+      <call-query href="delete_WSO2_QAP_TESTCASE_FROM_SCENARIO_query">
+	<with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
          <with-param name="WSO2_QAP_TEST_CASE_ID" query-param="WSO2_QAP_TEST_CASE_ID"/>
       </call-query>
    </resource>

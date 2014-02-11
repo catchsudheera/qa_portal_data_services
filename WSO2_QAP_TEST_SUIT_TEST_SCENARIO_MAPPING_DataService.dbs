@@ -9,6 +9,16 @@
       <param name="WSO2_QAP_PRIORITY" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
       <param name="WSO2_QAP_OWNER" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
    </query>
+   <query id="delete_WSO2_QAP_TEST_SCENARIO_query" useConfig="default">
+      <sql>DELETE FROM WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING WHERE WSO2_QAP_TEST_SCENARIO_ID=? AND WSO2_QAP_TEST_SUIT_ID=?</sql>
+      <param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="insert_WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING_reduced_query" useConfig="default">
+      <sql>INSERT INTO WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING(WSO2_QAP_TEST_SCENARIO_ID,WSO2_QAP_TEST_SUIT_ID) VALUES(?,?)</sql>
+      <param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
    <query id="select_all_WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING_query" useConfig="default">
       <sql>SELECT WSO2_QAP_TEST_SCENARIO_ID, WSO2_QAP_TEST_SUIT_ID, WSO2_QAP_PRIORITY, WSO2_QAP_OWNER FROM WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING</sql>
       <result element="WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPINGCollection" rowName="WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING">
@@ -18,7 +28,15 @@
          <element column="WSO2_QAP_OWNER" name="WSO2_QAP_OWNER" xsdType="xs:string"/>
       </result>
    </query>
-
+   <query id="select_WSO2_QAP_TEST_SCENARIO_NOT_IN_SUIT_MAPPING_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_TEST_SCENARIO_ID, WSO2_QAP_TEST_SCENARIO_NAME, WSO2_QAP_DESCRIPTION FROM WSO2_QAP_TEST_SCENARIO WHERE WSO2_QAP_TEST_SCENARIO_ID NOT IN (SELECT WSO2_QAP_TEST_SCENARIO_ID FROM WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING WHERE WSO2_QAP_TEST_SUIT_ID=?)</sql>
+      <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_TEST_SCENARIO_NOT_IN_SUIT_MAPPINGCollection" rowName="WSO2_QAP_TEST_SCENARIO_NOT_IN_SUIT_MAPPING">
+         <element column="WSO2_QAP_TEST_SCENARIO_ID" name="WSO2_QAP_TEST_SCENARIO_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_TEST_SCENARIO_NAME" name="WSO2_QAP_TEST_SCENARIO_NAME" xsdType="xs:string"/>
+         <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
+      </result>
+   </query>
    <query id="select_TESTSCENARIO_FOR_WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING_query" useConfig="default">
       <sql>SELECT WSO2_QAP_TEST_SCENARIO_ID FROM WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING WHERE WSO2_QAP_TEST_SUIT_ID=?</sql>
       <param name="WSO2_QAP_TEST_SUIT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
@@ -39,9 +57,25 @@
          <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
       </call-query>
    </operation>
-
     <resource method="GET" path="get/testscenarios_by_testsuit_ids/{WSO2_QAP_TEST_SUIT_ID}">
       <call-query href="select_TESTSCENARIO_FOR_WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING_query">
+         <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
+      </call-query>
+   </resource>
+   <resource method="GET" path="get/testscenarios_not_in_suit_mapping_by_testsuit_id/{WSO2_QAP_TEST_SUIT_ID}">
+      <call-query href="select_WSO2_QAP_TEST_SCENARIO_NOT_IN_SUIT_MAPPING_query">
+         <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
+      </call-query>
+   </resource>
+   <resource method="POST" path="add/data_to_suit_scenario_mapping">
+      <call-query href="insert_WSO2_QAP_TEST_SUIT_TEST_SCENARIO_MAPPING_reduced_query">
+         <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
+         <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
+      </call-query>
+   </resource>
+   <resource method="DELETE" path="delete/TESTSCENARIO_mapping_testsuit/{WSO2_QAP_TEST_SCENARIO_ID}/{WSO2_QAP_TEST_SUIT_ID}">
+      <call-query href="delete_WSO2_QAP_TEST_SCENARIO_query">
+         <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
          <with-param name="WSO2_QAP_TEST_SUIT_ID" query-param="WSO2_QAP_TEST_SUIT_ID"/>
       </call-query>
    </resource>

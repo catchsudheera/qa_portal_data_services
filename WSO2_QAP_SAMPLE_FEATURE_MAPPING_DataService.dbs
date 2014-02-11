@@ -37,6 +37,14 @@
          <element column="WSO2_QAP_SAMPLE_ID" name="WSO2_QAP_SAMPLE_ID" xsdType="xs:integer"/>
       </result>
    </query>
+
+   <query id="delete_SAMPLEID_FEATUREID_WSO2_QAP_SAMPLE_MAPPING_FEATURE_query" useConfig="default">
+      <sql>DELETE FROM WSO2_QAP_SAMPLE_FEATURE_MAPPING WHERE WSO2_QAP_SAMPLE_ID=? AND WSO2_QAP_FEATURE_ID=?</sql>
+      <param name="WSO2_QAP_SAMPLE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_FEATURE_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+
+
    <operation name="insert_WSO2_QAP_SAMPLE_FEATURE_MAPPING_operation">
       <call-query href="insert_WSO2_QAP_SAMPLE_FEATURE_MAPPING_query">
          <with-param name="WSO2_QAP_SAMPLE_ID" query-param="WSO2_QAP_SAMPLE_ID"/>
@@ -63,4 +71,12 @@
          
       </call-query>
    </resource>
+
+   <resource method="DELETE" path="delete/sampleid_featureid/{WSO2_QAP_SAMPLE_ID}/{WSO2_QAP_FEATURE_ID}">
+       <call-query href="delete_SAMPLEID_FEATUREID_WSO2_QAP_SAMPLE_MAPPING_FEATURE_query">
+         <with-param name="WSO2_QAP_SAMPLE_ID" query-param="WSO2_QAP_SAMPLE_ID"/>
+         <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
+      </call-query>
+   </resource>
+
 </data>
