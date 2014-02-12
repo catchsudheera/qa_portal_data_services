@@ -1,29 +1,15 @@
-<data description="multiple services per each table" enableBatchRequests="false" enableBoxcarring="false" name="WSO2_QAP_SAMPLE_DataService" serviceNamespace="http://ws.wso2.org/dataservice" serviceStatus="active">
+<data name="WSO2_QAP_SAMPLE_DataService" serviceNamespace="http://ws.wso2.org/dataservice">
    <config id="default">
       <property name="carbon_datasource_name">wso2_mysql_qa_portal</property>
    </config>
-   <query id="select_all_WSO2_QAP_SAMPLE_query" useConfig="default">
-      <sql>SELECT WSO2_QAP_SAMPLE_ID, WSO2_QAP_SAMPLE_NAME, WSO2_QAP_DESCRIPTION, WSO2_QAP_SAMPLE_URL FROM WSO2_QAP_SAMPLE</sql>
-      <result element="WSO2_QAP_SAMPLECollection" rowName="WSO2_QAP_SAMPLE">
+   <query id="select_MAX_WSO2_QAP_SAMPLE_ID_query" useConfig="default">
+      <sql>SELECT MAX( WSO2_QAP_SAMPLE_ID ) AS WSO2_QAP_SAMPLE_ID FROM WSO2_QAP_SAMPLE</sql>
+      <result element="MAX_WSO2_QAP_SAMPLE_IDCollection" rowName="MAX_WSO2_QAP_SAMPLE_ID">
          <element column="WSO2_QAP_SAMPLE_ID" name="WSO2_QAP_SAMPLE_ID" xsdType="xs:integer"/>
-         <element column="WSO2_QAP_SAMPLE_NAME" name="WSO2_QAP_SAMPLE_NAME" xsdType="xs:string"/>
-         <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
-	 <element column="WSO2_QAP_SAMPLE_URL" name="WSO2_QAP_SAMPLE_URL" xsdType="xs:string"/>
       </result>
    </query>
-   <query id="delete_WSO2_QAP_SAMPLE_query" useConfig="default">
-      <sql>DELETE FROM WSO2_QAP_SAMPLE WHERE WSO2_QAP_SAMPLE_ID=?</sql>
-      <param name="WSO2_QAP_SAMPLE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
-   </query>
-   <query id="insert_WSO2_QAP_SAMPLE_query" useConfig="default">
-      <sql>INSERT INTO WSO2_QAP_SAMPLE(WSO2_QAP_SAMPLE_NAME,WSO2_QAP_DESCRIPTION,WSO2_QAP_SAMPLE_URL) VALUES(?,?,?)</sql>
-      <param name="WSO2_QAP_SAMPLE_NAME" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
-      <param name="WSO2_QAP_DESCRIPTION" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
-      <param name="WSO2_QAP_SAMPLE_URL" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
-   </query>
-   <query id="select_with_key_WSO2_QAP_SAMPLE_query" useConfig="default">
-      <sql>SELECT WSO2_QAP_SAMPLE_ID, WSO2_QAP_SAMPLE_NAME, WSO2_QAP_DESCRIPTION, WSO2_QAP_SAMPLE_URL FROM WSO2_QAP_SAMPLE WHERE WSO2_QAP_SAMPLE_ID=?</sql>
-      <param name="WSO2_QAP_SAMPLE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   <query id="select_all_WSO2_QAP_SAMPLE_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_SAMPLE_ID, WSO2_QAP_SAMPLE_NAME, WSO2_QAP_DESCRIPTION, WSO2_QAP_SAMPLE_URL FROM WSO2_QAP_SAMPLE</sql>
       <result element="WSO2_QAP_SAMPLECollection" rowName="WSO2_QAP_SAMPLE">
          <element column="WSO2_QAP_SAMPLE_ID" name="WSO2_QAP_SAMPLE_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_SAMPLE_NAME" name="WSO2_QAP_SAMPLE_NAME" xsdType="xs:string"/>
@@ -31,11 +17,34 @@
          <element column="WSO2_QAP_SAMPLE_URL" name="WSO2_QAP_SAMPLE_URL" xsdType="xs:string"/>
       </result>
    </query>
+   <query id="delete_WSO2_QAP_SAMPLE_query" useConfig="default">
+      <sql>DELETE FROM WSO2_QAP_SAMPLE WHERE WSO2_QAP_SAMPLE_ID=?</sql>
+      <param name="WSO2_QAP_SAMPLE_ID" ordinal="1" sqlType="INTEGER"/>
+   </query>
+   <query id="insert_WSO2_QAP_SAMPLE_query" returnGeneratedKeys="true" useConfig="default">
+      <sql>INSERT INTO WSO2_QAP_SAMPLE(WSO2_QAP_SAMPLE_NAME,WSO2_QAP_DESCRIPTION,WSO2_QAP_SAMPLE_URL) VALUES(?,?,?)</sql>
+      <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+         <element column="1" name="ID" xsdType="integer"/>
+      </result>
+      <param name="WSO2_QAP_SAMPLE_NAME" ordinal="1" sqlType="STRING"/>
+      <param name="WSO2_QAP_DESCRIPTION" ordinal="2" sqlType="STRING"/>
+      <param name="WSO2_QAP_SAMPLE_URL" ordinal="3" sqlType="STRING"/>
+   </query>
+   <query id="select_with_key_WSO2_QAP_SAMPLE_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_SAMPLE_ID, WSO2_QAP_SAMPLE_NAME, WSO2_QAP_DESCRIPTION, WSO2_QAP_SAMPLE_URL FROM WSO2_QAP_SAMPLE WHERE WSO2_QAP_SAMPLE_ID=?</sql>
+      <result element="WSO2_QAP_SAMPLECollection" rowName="WSO2_QAP_SAMPLE">
+         <element column="WSO2_QAP_SAMPLE_ID" name="WSO2_QAP_SAMPLE_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_SAMPLE_NAME" name="WSO2_QAP_SAMPLE_NAME" xsdType="xs:string"/>
+         <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
+         <element column="WSO2_QAP_SAMPLE_URL" name="WSO2_QAP_SAMPLE_URL" xsdType="xs:string"/>
+      </result>
+      <param name="WSO2_QAP_SAMPLE_ID" ordinal="1" sqlType="INTEGER"/>
+   </query>
    <query id="update_WSO2_QAP_SAMPLE_query" useConfig="default">
       <sql>UPDATE WSO2_QAP_SAMPLE SET WSO2_QAP_SAMPLE_NAME=?,WSO2_QAP_DESCRIPTION=? WHERE WSO2_QAP_SAMPLE_ID=?</sql>
-      <param name="WSO2_QAP_SAMPLE_NAME" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
-      <param name="WSO2_QAP_DESCRIPTION" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
-      <param name="WSO2_QAP_SAMPLE_ID" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_SAMPLE_NAME" ordinal="1" sqlType="STRING"/>
+      <param name="WSO2_QAP_DESCRIPTION" ordinal="2" sqlType="STRING"/>
+      <param name="WSO2_QAP_SAMPLE_ID" ordinal="3" sqlType="INTEGER"/>
    </query>
    <operation name="select_with_key_WSO2_QAP_SAMPLE_operation">
       <call-query href="select_with_key_WSO2_QAP_SAMPLE_query">
@@ -64,10 +73,8 @@
       <call-query href="select_all_WSO2_QAP_SAMPLE_query"/>
    </operation>
    <resource method="GET" path="view/samples">
-      <call-query href="select_all_WSO2_QAP_SAMPLE_query">
-         </call-query> 
+      <call-query href="select_all_WSO2_QAP_SAMPLE_query"/>
    </resource>
-
    <resource method="POST" path="add/samples">
       <call-query href="insert_WSO2_QAP_SAMPLE_query">
          <with-param name="WSO2_QAP_SAMPLE_NAME" query-param="WSO2_QAP_SAMPLE_NAME"/>
@@ -75,17 +82,17 @@
          <with-param name="WSO2_QAP_SAMPLE_URL" query-param="WSO2_QAP_SAMPLE_URL"/>
       </call-query>
    </resource>
-
    <resource method="DELETE" path="delete/samples/{WSO2_QAP_SAMPLE_ID}">
-       <call-query href="delete_WSO2_QAP_SAMPLE_query">
+      <call-query href="delete_WSO2_QAP_SAMPLE_query">
          <with-param name="WSO2_QAP_SAMPLE_ID" query-param="WSO2_QAP_SAMPLE_ID"/>
       </call-query>
    </resource>
-
    <resource method="GET" path="view/samples_with_id/{WSO2_QAP_SAMPLE_ID}">
       <call-query href="select_with_key_WSO2_QAP_SAMPLE_query">
          <with-param name="WSO2_QAP_SAMPLE_ID" query-param="WSO2_QAP_SAMPLE_ID"/>
       </call-query>
    </resource>
-
+   <resource method="GET" path="get/get_last_inserted_sample_id">
+      <call-query href="select_MAX_WSO2_QAP_SAMPLE_ID_query"/>
+   </resource>
 </data>

@@ -1,11 +1,11 @@
-<data description="multiple services per each table" enableBatchRequests="false" enableBoxcarring="false" name="WSO2_QAP_SAMPLE_FEATURE_MAPPING_DataService" serviceNamespace="http://ws.wso2.org/dataservice" serviceStatus="active">
+<data name="WSO2_QAP_SAMPLE_FEATURE_MAPPING_DataService" serviceNamespace="http://ws.wso2.org/dataservice">
    <config id="default">
       <property name="carbon_datasource_name">wso2_mysql_qa_portal</property>
    </config>
    <query id="insert_WSO2_QAP_SAMPLE_FEATURE_MAPPING_query" useConfig="default">
       <sql>INSERT INTO WSO2_QAP_SAMPLE_FEATURE_MAPPING(WSO2_QAP_FEATURE_ID,WSO2_QAP_SAMPLE_ID) VALUES(?,?)</sql>
-      <param name="WSO2_QAP_FEATURE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
-      <param name="WSO2_QAP_SAMPLE_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_FEATURE_ID" ordinal="1" sqlType="INTEGER"/>
+      <param name="WSO2_QAP_SAMPLE_ID" ordinal="2" sqlType="INTEGER"/>
    </query>
    <query id="select_all_WSO2_QAP_SAMPLE_FEATURE_MAPPING_query" useConfig="default">
       <sql>SELECT WSO2_QAP_FEATURE_ID, WSO2_QAP_SAMPLE_ID FROM WSO2_QAP_SAMPLE_FEATURE_MAPPING</sql>
@@ -16,35 +16,32 @@
    </query>
    <query id="select_with_sampleid_WSO2_QAP_SAMPLE_FEATURE_MAPPING_query" useConfig="default">
       <sql>SELECT WSO2_QAP_FEATURE_ID, WSO2_QAP_SAMPLE_ID FROM WSO2_QAP_SAMPLE_FEATURE_MAPPING WHERE WSO2_QAP_SAMPLE_ID=?</sql>
-      <param name="WSO2_QAP_SAMPLE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <result element="WSO2_QAP_SAMPLE_FEATURE_MAPPINGCollection" rowName="WSO2_QAP_SAMPLE_FEATURE_MAPPING">
          <element column="WSO2_QAP_FEATURE_ID" name="WSO2_QAP_FEATURE_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_SAMPLE_ID" name="WSO2_QAP_SAMPLE_ID" xsdType="xs:integer"/>
       </result>
+      <param name="WSO2_QAP_SAMPLE_ID" ordinal="1" sqlType="INTEGER"/>
    </query>
-    <query id="select_without_featureid_WSO2_QAP_SAMPLE_FEATURE_MAPPING_query" useConfig="default">
+   <query id="select_without_featureid_WSO2_QAP_SAMPLE_FEATURE_MAPPING_query" useConfig="default">
       <sql>SELECT WSO2_QAP_SAMPLE_ID FROM WSO2_QAP_SAMPLE WHERE WSO2_QAP_SAMPLE_ID NOT IN (SELECT WSO2_QAP_SAMPLE_ID FROM WSO2_QAP_SAMPLE_FEATURE_MAPPING WHERE WSO2_QAP_FEATURE_ID=?)</sql>
-      <param name="WSO2_QAP_FEATURE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <result element="WSO2_QAP_SAMPLE_FEATURE_MAPPINGCollection" rowName="WSO2_QAP_SAMPLE_FEATURE_MAPPING">
-              <element column="WSO2_QAP_SAMPLE_ID" name="WSO2_QAP_SAMPLE_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_SAMPLE_ID" name="WSO2_QAP_SAMPLE_ID" xsdType="xs:integer"/>
       </result>
+      <param name="WSO2_QAP_FEATURE_ID" ordinal="1" sqlType="INTEGER"/>
    </query>
    <query id="select_without_new_sampleid_WSO2_QAP_SAMPLE_FEATURE_MAPPING_query" useConfig="default">
       <sql>SELECT WSO2_QAP_FEATURE_ID, WSO2_QAP_SAMPLE_ID FROM WSO2_QAP_SAMPLE_FEATURE_MAPPING WHERE WSO2_QAP_SAMPLE_ID NOT IN (?)</sql>
-      <param name="WSO2_QAP_SAMPLE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <result element="WSO2_QAP_SAMPLE_FEATURE_MAPPINGCollection" rowName="WSO2_QAP_SAMPLE_FEATURE_MAPPING">
          <element column="WSO2_QAP_FEATURE_ID" name="WSO2_QAP_FEATURE_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_SAMPLE_ID" name="WSO2_QAP_SAMPLE_ID" xsdType="xs:integer"/>
       </result>
+      <param name="WSO2_QAP_SAMPLE_ID" ordinal="1" sqlType="INTEGER"/>
    </query>
-
    <query id="delete_SAMPLEID_FEATUREID_WSO2_QAP_SAMPLE_MAPPING_FEATURE_query" useConfig="default">
       <sql>DELETE FROM WSO2_QAP_SAMPLE_FEATURE_MAPPING WHERE WSO2_QAP_SAMPLE_ID=? AND WSO2_QAP_FEATURE_ID=?</sql>
-      <param name="WSO2_QAP_SAMPLE_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
-      <param name="WSO2_QAP_FEATURE_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_SAMPLE_ID" ordinal="1" sqlType="INTEGER"/>
+      <param name="WSO2_QAP_FEATURE_ID" ordinal="2" sqlType="INTEGER"/>
    </query>
-
-
    <operation name="insert_WSO2_QAP_SAMPLE_FEATURE_MAPPING_operation">
       <call-query href="insert_WSO2_QAP_SAMPLE_FEATURE_MAPPING_query">
          <with-param name="WSO2_QAP_SAMPLE_ID" query-param="WSO2_QAP_SAMPLE_ID"/>
@@ -65,18 +62,15 @@
       </call-query>
    </resource>
    <resource method="POST" path="add/featureswithsamples">
-     <call-query href="insert_WSO2_QAP_SAMPLE_FEATURE_MAPPING_query">
+      <call-query href="insert_WSO2_QAP_SAMPLE_FEATURE_MAPPING_query">
          <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
          <with-param name="WSO2_QAP_SAMPLE_ID" query-param="WSO2_QAP_SAMPLE_ID"/>
-         
       </call-query>
    </resource>
-
    <resource method="DELETE" path="delete/sampleid_featureid/{WSO2_QAP_SAMPLE_ID}/{WSO2_QAP_FEATURE_ID}">
-       <call-query href="delete_SAMPLEID_FEATUREID_WSO2_QAP_SAMPLE_MAPPING_FEATURE_query">
+      <call-query href="delete_SAMPLEID_FEATUREID_WSO2_QAP_SAMPLE_MAPPING_FEATURE_query">
          <with-param name="WSO2_QAP_SAMPLE_ID" query-param="WSO2_QAP_SAMPLE_ID"/>
          <with-param name="WSO2_QAP_FEATURE_ID" query-param="WSO2_QAP_FEATURE_ID"/>
       </call-query>
    </resource>
-
 </data>
