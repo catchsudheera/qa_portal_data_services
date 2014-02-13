@@ -73,8 +73,7 @@
       </call-query>
    </operation>
    <resource method="GET" path="view/artifacts">
-      <call-query href="select_all_WSO2_QAP_ARTIFACT_query">                                     
-      </call-query>
+      <call-query href="select_all_WSO2_QAP_ARTIFACT_query">                                           </call-query>
    </resource>
    <resource method="DELETE" path="delete/artifacts/{WSO2_QAP_ARTIFACT_ID}">
       <call-query href="delete_WSO2_QAP_ARTIFACT_query">
@@ -94,8 +93,14 @@
       </call-query>
    </resource>
    <resource method="GET" path="view/last_id">
-      <call-query href="get_last_inserted_id">
-         
+      <call-query href="get_last_inserted_id">               </call-query>
+   </resource>
+   <resource method="PUT" path="edit/artifacts">
+      <call-query href="update_WSO2_QAP_ARTIFACT_query">
+          <with-param name="WSO2_QAP_ARTIFACT_NAME" query-param="WSO2_QAP_ARTIFACT_NAME"/>
+          <with-param name="WSO2_QAP_ARTIFACT_DESCRIPTION" query-param="WSO2_QAP_ARTIFACT_DESCRIPTION"/>
+          <with-param name="WSO2_QAP_LOCATION" query-param="WSO2_QAP_LOCATION"/>       
+         <with-param name="WSO2_QAP_ARTIFACT_ID" query-param="WSO2_QAP_ARTIFACT_ID"/>
       </call-query>
    </resource>
 </data>

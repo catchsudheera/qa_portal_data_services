@@ -21,8 +21,11 @@
       <sql>DELETE FROM WSO2_QAP_SAMPLE WHERE WSO2_QAP_SAMPLE_ID=?</sql>
       <param name="WSO2_QAP_SAMPLE_ID" ordinal="1" sqlType="INTEGER"/>
    </query>
-   <query id="insert_WSO2_QAP_SAMPLE_query" useConfig="default">
+   <query id="insert_WSO2_QAP_SAMPLE_query" keyColumns="WSO2_QAP_SAMPLE_ID" returnGeneratedKeys="true" useConfig="default">
       <sql>INSERT INTO WSO2_QAP_SAMPLE(WSO2_QAP_SAMPLE_NAME,WSO2_QAP_DESCRIPTION,WSO2_QAP_SAMPLE_URL) VALUES(?,?,?)</sql>
+      <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+         <element column="1" name="ID" xsdType="integer"/>
+      </result>
       <param name="WSO2_QAP_SAMPLE_NAME" ordinal="1" sqlType="STRING"/>
       <param name="WSO2_QAP_DESCRIPTION" ordinal="2" sqlType="STRING"/>
       <param name="WSO2_QAP_SAMPLE_URL" ordinal="3" sqlType="STRING"/>

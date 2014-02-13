@@ -48,6 +48,8 @@
       </result>
    </query>
 
+
+
    
    <resource method="GET" path="view/testscenario">
       <call-query href="select_all_WSO2_QAP_TEST_SCENARIO_query">                                     
@@ -74,6 +76,14 @@
 <resource method="GET" path="get/testscenario_join_testcase_by_testscenario_id/{WSO2_QAP_TEST_SCENARIO_ID}">
       <call-query href="select_all_WSO2_QAP_TEST_CASE_query">  
          <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
+      </call-query>
+   </resource>
+
+<resource method="PUT" path="edit/testscenario">
+      <call-query href="update_WSO2_QAP_TEST_SCENARIO_query">
+         <with-param name="WSO2_QAP_TEST_SCENARIO_NAME" query-param="WSO2_QAP_TEST_SCENARIO_NAME"/>
+         <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
+	<with-param name="WSO2_QAP_DESCRIPTION" query-param="WSO2_QAP_DESCRIPTION"/>
       </call-query>
    </resource>
 </data>
