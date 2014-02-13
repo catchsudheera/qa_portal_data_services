@@ -32,15 +32,12 @@
       </result>
    </query>
    <query id="select_ALL_DETAILS_FROM_WSO2_QAP_TEST_PLAN_TO_TEST_CASE_query" useConfig="default">
-      <sql>SELECT WSO2_QAP_BUILD_ID, WSO2_QAP_BUILD_NAME, WSO2_QAP_TEST_CASE_NAME, WSO2_QAP_TEST_STATUS, WSO2_QAP_AUTOMATION_TEST_RESULT, WSO2_QAP_TESTED_BY FROM WSO2_QAP_TEST_PLAN NATURAL JOIN WSO2_QAP_PRODUCT_BUILD NATURAL JOIN WSO2_QAP_BUILD_MAPPING_TESTRESULT NATURAL JOIN WSO2_QAP_TEST_RESULT NATURAL JOIN WSO2_QAP_TEST_CASE WHERE WSO2_QAP_TEST_PLAN_ID=?</sql>
+      <sql>SELECT WSO2_QAP_BUILD_ID, WSO2_QAP_BUILD_NAME, DATE_FORMAT(WSO2_QAP_RELEASE_DATE,'%d/%m/%Y') AS WSO2_QAP_RELEASE_DATE FROM WSO2_QAP_PRODUCT_BUILD WHERE WSO2_QAP_TEST_PLAN_ID=?</sql>
       <param name="WSO2_QAP_TEST_PLAN_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <result element="WSO2_QAP_BUILD_RESULTCollection" rowName="WSO2_QAP_BUILD_RESULT">
          <element column="WSO2_QAP_BUILD_ID" name="WSO2_QAP_BUILD_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_BUILD_NAME" name="WSO2_QAP_BUILD_NAME" xsdType="xs:string"/>
-         <element column="WSO2_QAP_TEST_CASE_NAME" name="WSO2_QAP_TEST_CASE_NAME" xsdType="xs:string"/>
-         <element column="WSO2_QAP_TEST_STATUS" name="WSO2_QAP_TEST_STATUS" xsdType="xs:string"/>
-         <element column="WSO2_QAP_AUTOMATION_TEST_RESULT" name="WSO2_QAP_AUTOMATION_TEST_RESULT" xsdType="xs:string"/>
-         <element column="WSO2_QAP_TESTED_BY" name="WSO2_QAP_TESTED_BY" xsdType="xs:string"/>
+         <element column="WSO2_QAP_RELEASE_DATE" name="WSO2_QAP_RELEASE_DATE" xsdType="xs:string"/>
       </result>
    </query>
    <query id="update_WSO2_QAP_TEST_PLAN_query" useConfig="default">
@@ -91,7 +88,7 @@
    </resource>
    <resource method="GET" path="view/map_build_with_results/{WSO2_QAP_TEST_PLAN_ID}">
       <call-query href="select_ALL_DETAILS_FROM_WSO2_QAP_TEST_PLAN_TO_TEST_CASE_query">   
-      <with-param name="WSO2_QAP_TEST_PLAN_ID" query-param="WSO2_QAP_TEST_PLAN_ID"/>
+         <with-param name="WSO2_QAP_TEST_PLAN_ID" query-param="WSO2_QAP_TEST_PLAN_ID"/>
       </call-query>
    </resource>
    <resource method="GET" path="view/test_plan_by_version_id/{WSO2_QAP_PRODUCT_VERSION_ID}">

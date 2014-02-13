@@ -8,7 +8,7 @@
       <param name="WSO2_QAP_REDMINE_URL" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
       <param name="WSO2_QAP_FEATURE_ID" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
    </query>
-   <query id="insert_WSO2_QAP_FEATURE_query" returnGeneratedKeys="true" useConfig="default">
+   <query id="insert_WSO2_QAP_FEATURE_query" keyColumns="WSO2_QAP_FEATURE_ID" returnGeneratedKeys="true" useConfig="default">
       <sql>INSERT INTO WSO2_QAP_FEATURE(WSO2_QAP_DESCRIPTION,WSO2_QAP_REDMINE_URL,WSO2_QAP_SUBJECT) VALUES(?,?,?)</sql>
       <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
          <element column="1" name="ID" xsdType="integer"/>

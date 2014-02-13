@@ -139,4 +139,11 @@
          <with-param name="WSO2_QAP_PRODUCT_VERSION_ID" query-param="WSO2_QAP_PRODUCT_VERSION_ID"/>
       </call-query>
    </resource>
+   <resource method="PUT" path="edit/version_details/">
+      <call-query href="update_WSO2_QAP_PRODUCT_VERSION_query">
+         <with-param name="WSO2_QAP_PRODUCT_VERSION" query-param="WSO2_QAP_PRODUCT_VERSION"/>
+         <with-param name="WSO2_QAP_PRODUCT_VERSION_ID" query-param="WSO2_QAP_PRODUCT_VERSION_ID"/>
+         <with-param name="WSO2_QAP_PRODUCT_ID" query-param="WSO2_QAP_PRODUCT_ID"/>
+      </call-query>
+   </resource>
 </data>

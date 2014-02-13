@@ -23,4 +23,12 @@
          <with-param name="WSO2_QAP_TEST_RESULT_ID" query-param="WSO2_QAP_TEST_RESULT_ID"/>
       </call-query>
    </operation>
+
+    <resource method="POST" path="add/builds_results">
+      <call-query href="insert_WSO2_QAP_BUILD_MAPPING_TESTRESULT_query">
+         <with-param name="WSO2_QAP_BUILD_ID" query-param="WSO2_QAP_BUILD_ID"/>
+         <with-param name="WSO2_QAP_TEST_RESULT_ID" query-param="WSO2_QAP_TEST_RESULT_ID"/>
+        
+      </call-query>
+   </resource>
 </data>
