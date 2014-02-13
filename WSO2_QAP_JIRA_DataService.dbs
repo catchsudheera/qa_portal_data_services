@@ -22,6 +22,15 @@
          <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
       </result>
    </query>
+   <query id="select_with_key_WSO2_QAP_JIRA_query" useConfig="default">
+      <sql>SELECT WSO2_QAP_JIRA_ID, WSO2_QAP_URL, WSO2_QAP_DESCRIPTION FROM WSO2_QAP_JIRA WHERE WSO2_QAP_JIRA_ID=?</sql>
+      <param name="WSO2_QAP_JIRA_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="WSO2_QAP_JIRACollection" rowName="WSO2_QAP_JIRA">
+         <element column="WSO2_QAP_JIRA_ID" name="WSO2_QAP_JIRA_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_URL" name="WSO2_QAP_URL" xsdType="xs:string"/>
+         <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
+       </result>
+   </query>
    <query id="select_JIRAURL_RESULTtable__WSO2_QAP_JIRA_query" useConfig="default">
       <sql>SELECT WSO2_QAP_JIRA_ID, WSO2_QAP_URL FROM WSO2_QAP_TEST_RESULT NATURAL JOIN WSO2_QAP_JIRA_MAPPING_TESTRESULT NATURAL JOIN WSO2_QAP_JIRA WHERE WSO2_QAP_TEST_RESULT_ID=?</sql>
       <param name="WSO2_QAP_TEST_RESULT_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
@@ -55,6 +64,12 @@
       <call-query href="insert_WSO2_QAP_JIRA_query">
          <with-param name="WSO2_QAP_URL" query-param="WSO2_QAP_URL"/>
          <with-param name="WSO2_QAP_DESCRIPTION" query-param="WSO2_QAP_DESCRIPTION"/>
+      </call-query>
+   </resource>
+
+   <resource method="GET" path="view/jira_by_id/{WSO2_QAP_JIRA_ID}">
+      <call-query href="select_with_key_WSO2_QAP_JIRA_query">
+         <with-param name="WSO2_QAP_JIRA_ID" query-param="WSO2_QAP_JIRA_ID"/>
       </call-query>
    </resource>
 </data>
