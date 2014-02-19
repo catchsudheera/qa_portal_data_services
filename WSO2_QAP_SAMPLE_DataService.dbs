@@ -41,10 +41,11 @@
       <param name="WSO2_QAP_SAMPLE_ID" ordinal="1" sqlType="INTEGER"/>
    </query>
    <query id="update_WSO2_QAP_SAMPLE_query" useConfig="default">
-      <sql>UPDATE WSO2_QAP_SAMPLE SET WSO2_QAP_SAMPLE_NAME=?,WSO2_QAP_DESCRIPTION=? WHERE WSO2_QAP_SAMPLE_ID=?</sql>
+      <sql>UPDATE WSO2_QAP_SAMPLE SET WSO2_QAP_SAMPLE_NAME=?,WSO2_QAP_DESCRIPTION=?,WSO2_QAP_SAMPLE_URL=? WHERE WSO2_QAP_SAMPLE_ID=?</sql>
       <param name="WSO2_QAP_SAMPLE_NAME" ordinal="1" sqlType="STRING"/>
       <param name="WSO2_QAP_DESCRIPTION" ordinal="2" sqlType="STRING"/>
-      <param name="WSO2_QAP_SAMPLE_ID" ordinal="3" sqlType="INTEGER"/>
+      <param name="WSO2_QAP_SAMPLE_URL" ordinal="3" sqlType="STRING"/>
+      <param name="WSO2_QAP_SAMPLE_ID" ordinal="4" sqlType="INTEGER"/>
    </query>
    <operation name="select_with_key_WSO2_QAP_SAMPLE_operation">
       <call-query href="select_with_key_WSO2_QAP_SAMPLE_query">
@@ -95,4 +96,14 @@
    <resource method="GET" path="get/get_last_inserted_sample_id">
       <call-query href="select_MAX_WSO2_QAP_SAMPLE_ID_query"/>
    </resource>
+
+   <resource method="PUT" path="edit/samples">
+      <call-query href="update_WSO2_QAP_SAMPLE_query">
+         <with-param name="WSO2_QAP_SAMPLE_ID" query-param="WSO2_QAP_SAMPLE_ID"/>
+         <with-param name="WSO2_QAP_SAMPLE_NAME" query-param="WSO2_QAP_SAMPLE_NAME"/>
+         <with-param name="WSO2_QAP_DESCRIPTION" query-param="WSO2_QAP_DESCRIPTION"/>
+         <with-param name="WSO2_QAP_SAMPLE_URL" query-param="WSO2_QAP_SAMPLE_URL"/>
+      </call-query>
+   </resource>
+
 </data>

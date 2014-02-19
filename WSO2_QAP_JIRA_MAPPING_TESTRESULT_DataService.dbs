@@ -36,6 +36,12 @@
          <with-param name="WSO2_QAP_JIRA_ID" query-param="WSO2_QAP_JIRA_ID"/>
       </call-query>
    </operation>
+
+
+
+
+
+
    <operation name="update_WSO2_QAP_JIRA_MAPPING_TESTRESULT_operation">
       <call-query href="update_WSO2_QAP_JIRA_MAPPING_TESTRESULT_query">
          <with-param name="WSO2_QAP_JIRA_ID" query-param="WSO2_QAP_JIRA_ID"/>
@@ -56,4 +62,13 @@
          <with-param name="WSO2_QAP_TEST_RESULT_ID" query-param="WSO2_QAP_TEST_RESULT_ID"/>
       </call-query>
    </operation>
+
+<resource method="POST" path="add/jira_results">
+      <call-query href="insert_WSO2_QAP_JIRA_MAPPING_TESTRESULT_query">
+         <with-param name="WSO2_QAP_JIRA_ID" query-param="WSO2_QAP_JIRA_ID"/>
+         <with-param name="WSO2_QAP_TEST_RESULT_ID" query-param="WSO2_QAP_TEST_RESULT_ID"/>
+      </call-query>
+   </resource>
+
+
 </data>
