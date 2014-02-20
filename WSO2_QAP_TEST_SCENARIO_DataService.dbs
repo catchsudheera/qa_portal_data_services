@@ -1,19 +1,19 @@
-<data description="multiple services per each table" enableBatchRequests="false" enableBoxcarring="false" name="WSO2_QAP_TEST_SCENARIO_DataService" serviceNamespace="http://ws.wso2.org/dataservice" serviceStatus="active">
+<data name="WSO2_QAP_TEST_SCENARIO_DataService" serviceNamespace="http://ws.wso2.org/dataservice">
    <config id="default">
       <property name="carbon_datasource_name">wso2_mysql_qa_portal</property>
    </config>
    <query id="select_with_key_WSO2_QAP_TEST_SCENARIO_query" useConfig="default">
       <sql>SELECT WSO2_QAP_TEST_SCENARIO_ID, WSO2_QAP_DESCRIPTION, WSO2_QAP_TEST_SCENARIO_NAME FROM WSO2_QAP_TEST_SCENARIO WHERE WSO2_QAP_TEST_SCENARIO_ID=?</sql>
-      <param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
       <result element="WSO2_QAP_TEST_SCENARIOCollection" rowName="WSO2_QAP_TEST_SCENARIO">
          <element column="WSO2_QAP_TEST_SCENARIO_ID" name="WSO2_QAP_TEST_SCENARIO_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
          <element column="WSO2_QAP_TEST_SCENARIO_NAME" name="WSO2_QAP_TEST_SCENARIO_NAME" xsdType="xs:string"/>
       </result>
+      <param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="1" sqlType="INTEGER"/>
    </query>
    <query id="delete_WSO2_QAP_TEST_SCENARIO_query" useConfig="default">
       <sql>DELETE FROM WSO2_QAP_TEST_SCENARIO WHERE WSO2_QAP_TEST_SCENARIO_ID=?</sql>
-      <param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="1" sqlType="INTEGER"/>
    </query>
    <query id="select_all_WSO2_QAP_TEST_SCENARIO_query" useConfig="default">
       <sql>SELECT WSO2_QAP_TEST_SCENARIO_ID, WSO2_QAP_DESCRIPTION, WSO2_QAP_TEST_SCENARIO_NAME FROM WSO2_QAP_TEST_SCENARIO</sql>
@@ -23,37 +23,32 @@
          <element column="WSO2_QAP_TEST_SCENARIO_NAME" name="WSO2_QAP_TEST_SCENARIO_NAME" xsdType="xs:string"/>
       </result>
    </query>
-   <query id="insert_WSO2_QAP_TEST_SCENARIO_query" useConfig="default">
+   <query id="insert_WSO2_QAP_TEST_SCENARIO_query" keyColumns="WSO2_QAP_TEST_SCENARIO_ID" returnGeneratedKeys="true" useConfig="default">
       <sql>INSERT INTO WSO2_QAP_TEST_SCENARIO(WSO2_QAP_DESCRIPTION,WSO2_QAP_TEST_SCENARIO_NAME) VALUES(?,?)</sql>
-      <param name="WSO2_QAP_DESCRIPTION" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
-      <param name="WSO2_QAP_TEST_SCENARIO_NAME" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+         <element column="1" name="ID" xsdType="integer"/>
+      </result>
+      <param name="WSO2_QAP_DESCRIPTION" ordinal="1" sqlType="STRING"/>
+      <param name="WSO2_QAP_TEST_SCENARIO_NAME" ordinal="2" sqlType="STRING"/>
    </query>
    <query id="update_WSO2_QAP_TEST_SCENARIO_query" useConfig="default">
       <sql>UPDATE WSO2_QAP_TEST_SCENARIO SET WSO2_QAP_DESCRIPTION=?,WSO2_QAP_TEST_SCENARIO_NAME=? WHERE WSO2_QAP_TEST_SCENARIO_ID=?</sql>
-      <param name="WSO2_QAP_DESCRIPTION" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
-      <param name="WSO2_QAP_TEST_SCENARIO_NAME" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
-      <param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="WSO2_QAP_DESCRIPTION" ordinal="1" sqlType="STRING"/>
+      <param name="WSO2_QAP_TEST_SCENARIO_NAME" ordinal="2" sqlType="STRING"/>
+      <param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="3" sqlType="INTEGER"/>
    </query>
-
-<query id="select_all_WSO2_QAP_TEST_CASE_query" useConfig="default">
-      <sql>SELECT DISTINCT WSO2_QAP_TEST_CASE_ID,WSO2_QAP_TEST_CASE_NAME, WSO2_QAP_DESCRIPTION, WSO2_QAP_AUTOMATION_STATUS
-	FROM WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPING
-	NATURAL JOIN WSO2_QAP_TEST_CASE WHERE WSO2_QAP_TEST_SCENARIO_ID =?</sql>
-	<param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   <query id="select_all_WSO2_QAP_TEST_CASE_query" useConfig="default">
+      <sql>SELECT DISTINCT WSO2_QAP_TEST_CASE_ID,WSO2_QAP_TEST_CASE_NAME, WSO2_QAP_DESCRIPTION, WSO2_QAP_AUTOMATION_STATUS	FROM WSO2_QAP_TEST_SCENARIO_TEST_CASE_MAPPING	NATURAL JOIN WSO2_QAP_TEST_CASE WHERE WSO2_QAP_TEST_SCENARIO_ID =?</sql>
       <result element="WSO2_QAP_TEST_CASECollection" rowName="WSO2_QAP_TEST_CASE">
-	<element column="WSO2_QAP_TEST_CASE_ID" name="WSO2_QAP_TEST_CASE_ID" xsdType="xs:integer"/>
+         <element column="WSO2_QAP_TEST_CASE_ID" name="WSO2_QAP_TEST_CASE_ID" xsdType="xs:integer"/>
          <element column="WSO2_QAP_TEST_CASE_NAME" name="WSO2_QAP_TEST_CASE_NAME" xsdType="xs:string"/>
          <element column="WSO2_QAP_DESCRIPTION" name="WSO2_QAP_DESCRIPTION" xsdType="xs:string"/>
          <element column="WSO2_QAP_AUTOMATION_STATUS" name="WSO2_QAP_AUTOMATION_STATUS" xsdType="xs:string"/>
       </result>
+      <param name="WSO2_QAP_TEST_SCENARIO_ID" ordinal="1" sqlType="INTEGER"/>
    </query>
-
-
-
-   
    <resource method="GET" path="view/testscenario">
-      <call-query href="select_all_WSO2_QAP_TEST_SCENARIO_query">                                     
-      </call-query>
+      <call-query href="select_all_WSO2_QAP_TEST_SCENARIO_query"/>
    </resource>
    <resource method="DELETE" path="delete/testscenario/{WSO2_QAP_TEST_SCENARIO_ID}">
       <call-query href="delete_WSO2_QAP_TEST_SCENARIO_query">
@@ -66,25 +61,21 @@
          <with-param name="WSO2_QAP_TEST_SCENARIO_NAME" query-param="WSO2_QAP_TEST_SCENARIO_NAME"/>
       </call-query>
    </resource>
-   
-    <resource method="GET" path="view/testscenario_with_id/{WSO2_QAP_TEST_SCENARIO_ID}">
-      <call-query href="select_with_key_WSO2_QAP_TEST_SCENARIO_query"> 
-      <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>                                    
-      </call-query>
-   </resource>
-
-<resource method="GET" path="get/testscenario_join_testcase_by_testscenario_id/{WSO2_QAP_TEST_SCENARIO_ID}">
-      <call-query href="select_all_WSO2_QAP_TEST_CASE_query">  
+   <resource method="GET" path="view/testscenario_with_id/{WSO2_QAP_TEST_SCENARIO_ID}">
+      <call-query href="select_with_key_WSO2_QAP_TEST_SCENARIO_query">
          <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
       </call-query>
    </resource>
-
-<resource method="PUT" path="edit/testscenario">
+   <resource method="GET" path="get/testscenario_join_testcase_by_testscenario_id/{WSO2_QAP_TEST_SCENARIO_ID}">
+      <call-query href="select_all_WSO2_QAP_TEST_CASE_query">
+         <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
+      </call-query>
+   </resource>
+   <resource method="PUT" path="edit/testscenario">
       <call-query href="update_WSO2_QAP_TEST_SCENARIO_query">
          <with-param name="WSO2_QAP_TEST_SCENARIO_NAME" query-param="WSO2_QAP_TEST_SCENARIO_NAME"/>
          <with-param name="WSO2_QAP_TEST_SCENARIO_ID" query-param="WSO2_QAP_TEST_SCENARIO_ID"/>
-	<with-param name="WSO2_QAP_DESCRIPTION" query-param="WSO2_QAP_DESCRIPTION"/>
+         <with-param name="WSO2_QAP_DESCRIPTION" query-param="WSO2_QAP_DESCRIPTION"/>
       </call-query>
    </resource>
 </data>
-

@@ -40,6 +40,14 @@
       </result>
       
    </query>
+
+<query id="update_WSO2_QAP_JIRA_query" useConfig="default">
+      <sql>UPDATE WSO2_QAP_JIRA SET WSO2_QAP_DESCRIPTION=?,WSO2_QAP_URL=? WHERE WSO2_QAP_JIRA_ID=?</sql>
+      <param name="WSO2_QAP_DESCRIPTION" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="WSO2_QAP_URL" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="WSO2_QAP_JIRA_ID" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+
    <resource method="DELETE" path="delete/jira/{WSO2_QAP_JIRA_ID}">
       <call-query href="delete_WSO2_QAP_JIRA_query">
          <with-param name="WSO2_QAP_JIRA_ID" query-param="WSO2_QAP_JIRA_ID"/>
@@ -72,4 +80,13 @@
          <with-param name="WSO2_QAP_JIRA_ID" query-param="WSO2_QAP_JIRA_ID"/>
       </call-query>
    </resource>
+<resource method="PUT" path="edit/jira">
+      <call-query href="update_WSO2_QAP_JIRA_query">
+         <with-param name="WSO2_QAP_DESCRIPTION" query-param="WSO2_QAP_DESCRIPTION"/>
+         <with-param name="WSO2_QAP_URL" query-param="WSO2_QAP_URL"/>
+	<with-param name="WSO2_QAP_JIRA_ID" query-param="WSO2_QAP_JIRA_ID"/>
+      </call-query>
+   </resource>
+
+
 </data>
